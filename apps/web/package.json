@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@bidly/config": "workspace:*",
+    "@bidly/domain": "workspace:*",
     "@bidly/ui": "workspace:*",
     "@bidly/validation": "workspace:*",
     "next": "16.3.1",

@@ -4,29 +4,37 @@ import { expect, test } from '@playwright/test';
 
 import type { Page } from '@playwright/test';
 
-async function openTechnicalFoundation(page: Page): Promise<void> {
+async function openLanding(page: Page): Promise<void> {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   await expect(
-    page.getByRole('heading', { level: 1, name: 'Техническая проверка дизайн-системы' }),
+    page.getByRole('heading', { level: 1, name: 'Компании конкурируют за ваш выбор' }),
   ).toBeVisible();
 }
 
-test('renders only the technical foundation surface', async ({ page }) => {
-  await openTechnicalFoundation(page);
+test('explains the reverse-demand marketplace without inventing market data', async ({ page }) => {
+  await openLanding(page);
 
-  await expect(
-    page.getByText('Здесь нет торгов, кабинетов и другой продуктовой логики.'),
-  ).toBeVisible();
-  await expect(
-    page.getByRole('button', { name: 'Продуктовые действия пока недоступны' }),
-  ).toBeDisabled();
+  await expect(page.getByText('Вы сами выбираете подходящее предложение.')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Открыть бизнес-раздел' })).toHaveAttribute(
+    'href',
+    '/business',
+  );
 });
 
 test('has no serious or critical automated accessibility violations', async ({ page }) => {
-  await openTechnicalFoundation(page);
+  await openLanding(page);
   const results = await new AxeBuilder({ page }).analyze();
 
   expect(getBlockingAccessibilityViolations(results.violations)).toEqual([]);
+});
+
+test('keeps unavailable market data explicit instead of fabricating a market', async ({ page }) => {
+  await page.goto('/market', { waitUntil: 'domcontentloaded' });
+
+  await expect(
+    page.getByRole('heading', { level: 1, name: 'Рынок появится после подключения данных' }),
+  ).toBeVisible();
+  await expect(page.getByText('Мы не показываем вымышленные торги или цены.')).toBeVisible();
 });
 
 test('serves browser security headers', async ({ request }) => {

@@ -7,13 +7,32 @@
   --bidly-space-6: 2rem;
   --bidly-space-7: 3rem;
   --bidly-space-8: 4rem;
+  --bidly-space-9: 5rem;
+  --bidly-space-10: 7rem;
 
-  --bidly-radius-sm: 0.25rem;
-  --bidly-radius-md: 0.5rem;
-  --bidly-radius-lg: 0.75rem;
+  --bidly-radius-xs: 0.375rem;
+  --bidly-radius-sm: 0.625rem;
+  --bidly-radius-md: 0.875rem;
+  --bidly-radius-lg: 1.25rem;
+  --bidly-radius-xl: 1.75rem;
+  --bidly-radius-pill: 999px;
 
-  --bidly-shadow-raised: 0 0.5rem 1.5rem rgb(23 32 30 / 7%);
-  --bidly-outline-focus: 0 0 0 0.1875rem rgb(8 127 116 / 28%);
+  --bidly-shadow-subtle: 0 0.25rem 1rem rgb(35 42 93 / 6%);
+  --bidly-shadow-raised: 0 0.75rem 2.25rem rgb(35 42 93 / 10%);
+  --bidly-shadow-floating: 0 1.25rem 3.5rem rgb(35 42 93 / 14%);
+  --bidly-outline-focus: 0 0 0 0.1875rem rgb(61 54 223 / 28%);
+
+  --bidly-layout-content-max: 75rem;
+  --bidly-layout-reading-max: 43rem;
+  --bidly-layout-page-gutter: clamp(1rem, 4vw, 2.5rem);
+  --bidly-layout-business-rail: 16rem;
+  --bidly-density-comfortable: var(--bidly-space-5);
+  --bidly-density-compact: var(--bidly-space-3);
+
+  --bidly-z-base: 0;
+  --bidly-z-sticky: 20;
+  --bidly-z-overlay: 40;
+  --bidly-z-dialog: 60;
 
   --bidly-motion-fast: 120ms;
   --bidly-motion-standard: 180ms;

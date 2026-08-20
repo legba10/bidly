@@ -1,6 +1,7 @@
 :root {
   --bidly-font-sans:
-    Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    Inter, 'Segoe UI Variable', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica,
+    Arial, sans-serif;
   --bidly-font-display: var(--bidly-font-sans);
 
   --bidly-text-display-size: clamp(2.25rem, 5vw, 4.25rem);

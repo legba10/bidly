@@ -125,6 +125,9 @@ importers:
       '@bidly/config':
         specifier: workspace:*
         version: link:../../packages/config
+      '@bidly/domain':
+        specifier: workspace:*
+        version: link:../../packages/domain
       '@bidly/ui':
         specifier: workspace:*
         version: link:../../packages/ui

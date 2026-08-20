@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const webOrigin = 'http://127.0.0.1:3000';
+const webOrigin = 'http://127.0.0.1:3002';
 const apiOrigin = 'http://127.0.0.1:3001';
 
 export default defineConfig({
@@ -28,8 +28,8 @@ export default defineConfig({
     {
       // Browser smoke checks production builds: Next development reloads can
       // replace the document while axe is evaluating it, particularly in WebKit.
-      command: 'pnpm --filter @bidly/web start',
-      reuseExistingServer: !process.env['CI'],
+      command: 'pnpm --filter @bidly/web exec next start --hostname 127.0.0.1 --port 3002',
+      reuseExistingServer: false,
       stderr: 'pipe',
       stdout: 'pipe',
       timeout: 120_000,

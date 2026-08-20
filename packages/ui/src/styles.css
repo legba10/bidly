@@ -69,6 +69,28 @@
   border-color: var(--bidly-color-border-strong);
 }
 
+.bidly-brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--bidly-space-2);
+  color: var(--bidly-color-brand);
+  font-family: var(--bidly-font-display);
+  font-size: 1.25rem;
+  font-weight: 820;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.bidly-brand-logo > svg {
+  width: 1.75rem;
+  height: 1.75rem;
+  flex: 0 0 auto;
+}
+
+.bidly-brand-logo__word {
+  padding-bottom: 0.0625rem;
+}
+
 .bidly-button[data-variant='secondary']:hover:not(:disabled),
 .bidly-button[data-variant='quiet']:hover:not(:disabled) {
   background: var(--bidly-color-background-secondary);
@@ -242,6 +264,231 @@
   color: var(--bidly-color-success);
 }
 
+.bidly-integration-unavailable {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--bidly-space-4);
+  max-width: var(--bidly-layout-reading-max);
+  padding: clamp(var(--bidly-space-5), 6vw, var(--bidly-space-7));
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-surface);
+  border: 1px solid var(--bidly-color-border);
+  border-radius: var(--bidly-radius-xl);
+  box-shadow: var(--bidly-shadow-subtle);
+}
+
+.bidly-integration-unavailable__icon {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  color: var(--bidly-color-brand);
+  background: var(--bidly-color-brand-subtle);
+  border-radius: var(--bidly-radius-md);
+}
+
+.bidly-integration-unavailable__icon svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.bidly-integration-unavailable__content {
+  display: grid;
+  gap: var(--bidly-space-3);
+}
+
+.bidly-integration-unavailable__eyebrow,
+.bidly-integration-unavailable__title,
+.bidly-integration-unavailable__detail {
+  margin: 0;
+}
+
+.bidly-integration-unavailable__eyebrow {
+  color: var(--bidly-color-brand);
+  font-size: var(--bidly-text-caption-size);
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bidly-integration-unavailable__title {
+  font-family: var(--bidly-font-display);
+  font-size: var(--bidly-text-h2-size);
+  line-height: var(--bidly-text-h2-line);
+  letter-spacing: -0.035em;
+}
+
+.bidly-integration-unavailable__detail {
+  color: var(--bidly-color-text-secondary);
+  font-size: var(--bidly-text-body-size);
+  line-height: var(--bidly-text-body-line);
+}
+
+.bidly-integration-unavailable__action {
+  margin-top: var(--bidly-space-2);
+}
+
+.bidly-market-progress {
+  display: grid;
+  gap: var(--bidly-space-4);
+}
+
+.bidly-market-progress__title,
+.bidly-market-progress__list {
+  margin: 0;
+}
+
+.bidly-market-progress__title {
+  color: var(--bidly-color-text-secondary);
+  font-size: var(--bidly-text-label-size);
+  font-weight: 700;
+}
+
+.bidly-market-progress__list {
+  display: grid;
+  grid-template-columns: repeat(var(--bidly-progress-columns, 1), minmax(0, 1fr));
+  gap: var(--bidly-space-3);
+  padding: 0;
+  list-style: none;
+}
+
+.bidly-market-progress__step {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: var(--bidly-space-2);
+  align-items: center;
+  color: var(--bidly-color-text-muted);
+  font-size: var(--bidly-text-body-small-size);
+  font-weight: 620;
+  line-height: var(--bidly-text-body-small-line);
+}
+
+.bidly-market-progress__index {
+  display: grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  place-items: center;
+  color: var(--bidly-color-text-secondary);
+  background: var(--bidly-color-background-secondary);
+  border: 1px solid var(--bidly-color-border);
+  border-radius: var(--bidly-radius-pill);
+  font-size: var(--bidly-text-caption-size);
+  font-variant-numeric: tabular-nums;
+}
+
+.bidly-market-progress__step[data-state='complete'] .bidly-market-progress__index {
+  color: var(--bidly-color-on-brand);
+  background: var(--bidly-color-success);
+  border-color: var(--bidly-color-success);
+}
+
+.bidly-market-progress__step[data-state='current'] {
+  color: var(--bidly-color-text-primary);
+}
+
+.bidly-market-progress__step[data-state='current'] .bidly-market-progress__index {
+  color: var(--bidly-color-on-brand);
+  background: var(--bidly-color-brand);
+  border-color: var(--bidly-color-brand);
+}
+
+.bidly-demand-pulse {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--bidly-space-3);
+  align-items: center;
+  padding: var(--bidly-space-4);
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-surface);
+  border: 1px solid var(--bidly-color-border);
+  border-radius: var(--bidly-radius-lg);
+  box-shadow: var(--bidly-shadow-subtle);
+}
+
+.bidly-demand-pulse__network {
+  position: relative;
+  display: block;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: var(--bidly-color-brand-subtle);
+  border-radius: var(--bidly-radius-pill);
+}
+
+.bidly-demand-pulse__network::before,
+.bidly-demand-pulse__network::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.15rem;
+  height: 1px;
+  content: '';
+  background: var(--bidly-color-brand);
+  transform-origin: left center;
+}
+
+.bidly-demand-pulse__network::before {
+  transform: rotate(35deg);
+}
+
+.bidly-demand-pulse__network::after {
+  transform: rotate(-35deg);
+}
+
+.bidly-demand-pulse__network span {
+  position: absolute;
+  z-index: 1;
+  width: 0.42rem;
+  height: 0.42rem;
+  background: var(--bidly-color-brand);
+  border: 2px solid var(--bidly-color-surface);
+  border-radius: var(--bidly-radius-pill);
+}
+
+.bidly-demand-pulse__network span:nth-child(1) {
+  top: 0.38rem;
+  left: 0.42rem;
+}
+
+.bidly-demand-pulse__network span:nth-child(2) {
+  top: 1.38rem;
+  left: 0.42rem;
+}
+
+.bidly-demand-pulse__network span:nth-child(3) {
+  top: 0.87rem;
+  right: 0.35rem;
+}
+
+.bidly-demand-pulse__network span:nth-child(4) {
+  top: 0.87rem;
+  left: 1rem;
+  background: var(--bidly-color-success);
+}
+
+.bidly-demand-pulse__label,
+.bidly-demand-pulse__detail {
+  margin: 0;
+}
+
+.bidly-demand-pulse__label {
+  font-size: var(--bidly-text-body-small-size);
+  font-weight: 730;
+  line-height: var(--bidly-text-body-small-line);
+}
+
+.bidly-demand-pulse__detail {
+  margin-top: var(--bidly-space-1);
+  color: var(--bidly-color-text-muted);
+  font-size: var(--bidly-text-caption-size);
+  line-height: var(--bidly-text-caption-line);
+}
+
+.bidly-demand-pulse__icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--bidly-color-brand);
+}
+
 @keyframes bidly-spin {
   to {
     transform: rotate(360deg);
@@ -255,5 +502,11 @@
 
   .bidly-button__spinner {
     animation-duration: 1.6s;
+  }
+}
+
+@media (min-width: 48rem) {
+  .bidly-market-progress__list {
+    --bidly-progress-columns: 5;
   }
 }
