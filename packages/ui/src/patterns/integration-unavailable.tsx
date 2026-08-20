@@ -13,7 +13,7 @@ export interface IntegrationUnavailableProps {
 export function IntegrationUnavailable({
   action,
   detail,
-  eyebrow = 'Функция готовится',
+  eyebrow = 'Безопасный контур',
   title,
   titleAs = 'h1',
 }: IntegrationUnavailableProps) {

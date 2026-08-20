@@ -4,11 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "brand:assets": "node scripts/generate-brand-assets.mjs",
     "build": "next build",
     "dev": "next dev --hostname 127.0.0.1 --port 3000",
     "prepare:standalone": "node scripts/prepare-standalone.mjs",
     "start": "pnpm run prepare:standalone && node .next/standalone/apps/web/server.js",
-    "typecheck": "tsc -p tsconfig.json"
+    "typecheck": "tsc -p tsconfig.json",
+    "visual:capture": "node scripts/capture-prompt4-visuals.mjs"
   },
   "dependencies": {
     "@bidly/config": "workspace:*",

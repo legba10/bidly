@@ -11,14 +11,23 @@ async function openLanding(page: Page): Promise<void> {
   ).toBeVisible();
 }
 
-test('explains the reverse-demand marketplace without inventing market data', async ({ page }) => {
+test('explains the reverse-demand marketplace and provides a functioning public path', async ({
+  page,
+}) => {
   await openLanding(page);
 
   await expect(page.getByText('Вы сами выбираете подходящее предложение.')).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Открыть бизнес-раздел' })).toHaveAttribute(
+  await expect(page.getByRole('link', { name: 'Узнать о работе с Bidly' })).toHaveAttribute(
     'href',
-    '/business',
+    '/business-info',
   );
+
+  const secondStep = page.getByRole('button', { name: 'Bidly объединяет совместимый спрос' });
+  await secondStep.click();
+  await expect(secondStep).toHaveAttribute('aria-current', 'step');
+  await expect(
+    page.getByText('Похожие запросы объединяются без потери ваших индивидуальных ограничений.'),
+  ).toBeVisible();
 });
 
 test('has no serious or critical automated accessibility violations', async ({ page }) => {
@@ -28,13 +37,32 @@ test('has no serious or critical automated accessibility violations', async ({ p
   expect(getBlockingAccessibilityViolations(results.violations)).toEqual([]);
 });
 
-test('keeps unavailable market data explicit instead of fabricating a market', async ({ page }) => {
+test('keeps live market data explicit while exposing the approved category catalog', async ({
+  page,
+}) => {
   await page.goto('/market', { waitUntil: 'domcontentloaded' });
 
   await expect(
-    page.getByRole('heading', { level: 1, name: 'Рынок появится после подключения данных' }),
+    page.getByRole('heading', {
+      level: 1,
+      name: 'Выберите направление, с которого начнётся ваш запрос',
+    }),
   ).toBeVisible();
-  await expect(page.getByText('Мы не показываем вымышленные торги или цены.')).toBeVisible();
+  await expect(page.getByText('Направлений найдено: 3')).toBeVisible();
+  await expect(
+    page.getByText('Рынок появится после подключения проверенных данных').first(),
+  ).toBeVisible();
+  await expect(page.getByText('549 ₽')).toHaveCount(0);
+});
+
+test('opens the usable mobile navigation', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openLanding(page);
+
+  await page.locator('.bidly-public-header__menu > summary').click();
+  const navigation = page.getByRole('navigation', { name: 'Мобильная навигация' });
+  await expect(navigation).toBeVisible();
+  await expect(navigation.getByRole('link', { name: 'Рынок' })).toHaveAttribute('href', '/market');
 });
 
 test('serves browser security headers', async ({ request }) => {

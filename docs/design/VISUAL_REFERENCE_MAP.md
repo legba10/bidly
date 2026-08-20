@@ -2,6 +2,8 @@
 
 The supplied reference images were analyzed on 2026-08-20. They govern visual direction only; the domain model and contracts override any conflicting visual suggestion.
 
+Prompt №4 adds an owned brand reference: a blue folded-ribbon `B` and `BIDLY` wordmark. The reference was reconstructed as a vector-first asset and is covered by `BIDLY_BRAND_GUIDELINES.md`; it is not embedded or cropped from the supplied image.
+
 | Reference         | Visual decisions adopted                                                                                             | Domain corrections and improvements                                                                                                                                                                 |
 | ----------------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1. Landing        | Bright editorial hero, cobalt wordmark/action, soft cards around a collective-demand motif, generous section rhythm. | Counters, discounts, prices and running auction timers are not copied without live evidence. The hero explains the mechanism instead of advertising an unsupported saving.                          |

@@ -1,5 +1,5 @@
 import { Catalog } from '@bidly/domain';
-import { BidlyIcon, DemandPulse, MarketProgress } from '@bidly/ui';
+import { AnimatedBrandHero, BidlyIcon, BidlyMarketJourney, DemandPulse } from '@bidly/ui';
 import Link from 'next/link';
 
 import { PublicFooter, PublicHeader } from '../components/public-navigation';
@@ -43,15 +43,16 @@ export default function LandingPage() {
           </div>
           <div aria-label={messages.visual.title} className="bidly-landing-hero__visual">
             <div className="bidly-landing-orbit" />
-            <div className="bidly-landing-orbit__node bidly-landing-orbit__node--one" />
-            <div className="bidly-landing-orbit__node bidly-landing-orbit__node--two" />
-            <div className="bidly-landing-orbit__node bidly-landing-orbit__node--three" />
+            <div aria-hidden="true" className="bidly-demand-stream">
+              <span className="bidly-demand-stream__node bidly-demand-stream__node--one" />
+              <span className="bidly-demand-stream__node bidly-demand-stream__node--two" />
+              <span className="bidly-demand-stream__node bidly-demand-stream__node--three" />
+              <span className="bidly-demand-stream__line bidly-demand-stream__line--one" />
+              <span className="bidly-demand-stream__line bidly-demand-stream__line--two" />
+              <span className="bidly-demand-stream__line bidly-demand-stream__line--three" />
+            </div>
             <div className="bidly-landing-hero__visual-core">
-              <span className="bidly-landing-hero__visual-mark">
-                <BidlyIcon name="users" />
-              </span>
-              <p>{messages.visual.eyebrow}</p>
-              <strong>{messages.visual.title}</strong>
+              <AnimatedBrandHero />
             </div>
             <ul className="bidly-landing-hero__visual-cards">
               {messages.visual.items.map((item) => (
@@ -82,10 +83,7 @@ export default function LandingPage() {
             <h2>{messages.how.title}</h2>
             <p>{messages.how.lead}</p>
           </div>
-          <MarketProgress
-            steps={messages.how.steps.map((label) => ({ label, state: 'upcoming' as const }))}
-            title="Путь покупателя"
-          />
+          <BidlyMarketJourney steps={messages.how.steps} title="Путь покупателя" />
         </section>
 
         <section
@@ -132,7 +130,7 @@ export default function LandingPage() {
             <p className="bidly-eyebrow">{messages.business.eyebrow}</p>
             <h2>{messages.business.title}</h2>
             <p>{messages.business.lead}</p>
-            <Link className="bidly-link-button bidly-link-button--on-dark" href="/business">
+            <Link className="bidly-link-button bidly-link-button--on-dark" href="/business-info">
               {messages.business.action}
               <BidlyIcon name="arrow-right" />
             </Link>

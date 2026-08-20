@@ -72,23 +72,66 @@
 .bidly-brand-logo {
   display: inline-flex;
   align-items: center;
-  gap: var(--bidly-space-2);
+  gap: 0.56rem;
   color: var(--bidly-color-brand);
   font-family: var(--bidly-font-display);
-  font-size: 1.25rem;
-  font-weight: 820;
-  letter-spacing: -0.055em;
+  font-size: 1.16rem;
+  font-weight: 800;
+  letter-spacing: 0.085em;
   line-height: 1;
 }
 
-.bidly-brand-logo > svg {
-  width: 1.75rem;
-  height: 1.75rem;
+.bidly-brand-mark {
+  width: 1.6rem;
+  height: 1.86rem;
   flex: 0 0 auto;
+  overflow: visible;
 }
 
-.bidly-brand-logo__word {
-  padding-bottom: 0.0625rem;
+.bidly-brand-wordmark {
+  padding-bottom: 0.03em;
+  font-variant-ligatures: none;
+}
+
+.bidly-brand-logo[data-compact='true'] .bidly-brand-mark {
+  width: 1.85rem;
+  height: 2.15rem;
+}
+
+.bidly-brand-logo[data-tone='light'] {
+  color: var(--bidly-color-on-brand);
+}
+
+.bidly-animated-brand-hero {
+  position: relative;
+  display: grid;
+  width: min(17rem, 66vw);
+  aspect-ratio: 6 / 7;
+  place-items: center;
+}
+
+.bidly-animated-brand-hero__mark {
+  width: 100%;
+  height: 100%;
+}
+
+.bidly-animated-brand-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+a .bidly-brand-logo {
+  transition:
+    transform 180ms var(--bidly-ease-standard),
+    filter 180ms var(--bidly-ease-standard);
+}
+
+a:hover .bidly-brand-logo {
+  filter: saturate(1.08) brightness(1.03);
+  transform: translateY(-1px);
 }
 
 .bidly-button[data-variant='secondary']:hover:not(:disabled),
@@ -489,6 +532,115 @@
   color: var(--bidly-color-brand);
 }
 
+.bidly-market-journey {
+  display: grid;
+  gap: var(--bidly-space-5);
+}
+
+.bidly-market-journey__steps {
+  display: grid;
+  grid-template-columns: repeat(var(--bidly-journey-columns, 1), minmax(0, 1fr));
+  gap: var(--bidly-space-2);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.bidly-market-journey__step {
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--bidly-space-2);
+  align-items: center;
+  padding: var(--bidly-space-3);
+  color: var(--bidly-color-text-secondary);
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: var(--bidly-radius-md);
+  cursor: pointer;
+}
+
+.bidly-market-journey__step:hover,
+.bidly-market-journey__step[data-active='true'] {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-brand-subtle);
+}
+
+.bidly-market-journey__step:focus-visible {
+  outline: 2px solid var(--bidly-color-focus);
+  outline-offset: 2px;
+}
+
+.bidly-market-journey__index,
+.bidly-market-journey__detail-index {
+  display: grid;
+  place-items: center;
+  color: var(--bidly-color-brand);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+}
+
+.bidly-market-journey__index {
+  width: 1.8rem;
+  height: 1.8rem;
+  background: var(--bidly-color-surface);
+  border: 1px solid var(--bidly-color-border);
+  border-radius: var(--bidly-radius-pill);
+  font-size: var(--bidly-text-caption-size);
+}
+
+.bidly-market-journey__step[data-active='true'] .bidly-market-journey__index {
+  color: var(--bidly-color-on-brand);
+  background: var(--bidly-color-brand);
+  border-color: var(--bidly-color-brand);
+}
+
+.bidly-market-journey__label {
+  font-size: var(--bidly-text-body-small-size);
+  font-weight: 700;
+  line-height: var(--bidly-text-body-small-line);
+}
+
+.bidly-market-journey__detail {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--bidly-space-4);
+  align-items: start;
+  padding: var(--bidly-space-5);
+  background: var(--bidly-color-surface);
+  border: 1px solid var(--bidly-color-border);
+  border-radius: var(--bidly-radius-lg);
+  box-shadow: var(--bidly-shadow-subtle);
+}
+
+.bidly-market-journey__detail-index {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--bidly-color-brand-subtle);
+  border-radius: var(--bidly-radius-md);
+  font-size: var(--bidly-text-label-size);
+}
+
+.bidly-market-journey__detail p,
+.bidly-market-journey__detail span {
+  margin: 0;
+}
+
+.bidly-market-journey__detail p {
+  color: var(--bidly-color-text-primary);
+  font-size: var(--bidly-text-title-size);
+  font-weight: 750;
+}
+
+.bidly-market-journey__detail span {
+  display: block;
+  margin-top: var(--bidly-space-1);
+  color: var(--bidly-color-text-secondary);
+  font-size: var(--bidly-text-body-small-size);
+  line-height: var(--bidly-text-body-small-line);
+}
+
 @keyframes bidly-spin {
   to {
     transform: rotate(360deg);
@@ -496,17 +648,26 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bidly-button {
+  .bidly-button,
+  a .bidly-brand-logo {
     transition: none;
   }
 
   .bidly-button__spinner {
     animation-duration: 1.6s;
   }
+
+  .bidly-animated-brand-hero__video {
+    display: none;
+  }
 }
 
 @media (min-width: 48rem) {
   .bidly-market-progress__list {
     --bidly-progress-columns: 5;
+  }
+
+  .bidly-market-journey__steps {
+    --bidly-journey-columns: 7;
   }
 }

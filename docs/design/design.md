@@ -7,6 +7,8 @@
 
 Bidly is a marketplace of confirmed collective demand. A buyer should immediately understand: people state a need together; companies compete with complete terms; the buyer chooses an eligible offer and Bidly accompanies the connection or booking. The interface must not resemble a discount catalogue, a financial-trading terminal, or a generic SaaS dashboard.
 
+Prompt №4 adds the owned ribbon `B` as the product signature. Its vector master represents many buyer signals becoming one stronger demand; it is not a decorative background or a claim about a market result. See `BIDLY_BRAND_GUIDELINES.md`.
+
 ## Visual character
 
 - Buyer surfaces are calm, bright and spacious: cool off-white canvas, white cards, deep ink text and an electric-indigo action colour.
@@ -33,3 +35,5 @@ Bidly is a marketplace of confirmed collective demand. A buyer should immediatel
 ## Current integration boundary
 
 The published API currently exposes authentication identity, categories and offer acceptance only; the running API does not yet configure category queries or an auth session, and it has no public query endpoints for auctions, offers, bookings, capacity, supplier dashboards or admin data. Screens that need those reads stay explicitly unavailable instead of inventing a frontend state universe. See the implementation report for the exact dependency list.
+
+The public market now uses the approved DEV catalogue definitions as discovery content, without manufacturing pools, participant counts, terms, prices, availability or stages. It is not evidence that the live market API is available.

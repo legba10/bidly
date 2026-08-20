@@ -17,12 +17,12 @@
   --bidly-radius-xl: 1.75rem;
   --bidly-radius-pill: 999px;
 
-  --bidly-shadow-subtle: 0 0.25rem 1rem rgb(35 42 93 / 6%);
-  --bidly-shadow-raised: 0 0.75rem 2.25rem rgb(35 42 93 / 10%);
-  --bidly-shadow-floating: 0 1.25rem 3.5rem rgb(35 42 93 / 14%);
-  --bidly-outline-focus: 0 0 0 0.1875rem rgb(61 54 223 / 28%);
+  --bidly-shadow-subtle: 0 0.25rem 1rem rgb(20 40 92 / 6%);
+  --bidly-shadow-raised: 0 0.75rem 2.25rem rgb(20 40 92 / 10%);
+  --bidly-shadow-floating: 0 1.25rem 3.5rem rgb(20 40 92 / 14%);
+  --bidly-outline-focus: 0 0 0 0.1875rem rgb(10 27 255 / 28%);
 
-  --bidly-layout-content-max: 75rem;
+  --bidly-layout-content-max: 80rem;
   --bidly-layout-reading-max: 43rem;
   --bidly-layout-page-gutter: clamp(1rem, 4vw, 2.5rem);
   --bidly-layout-business-rail: 16rem;

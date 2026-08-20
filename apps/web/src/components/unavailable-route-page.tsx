@@ -23,9 +23,18 @@ export function UnavailableRoutePage({ area, businessFrame = false }: Unavailabl
           <p>Бизнес</p>
           <nav aria-label="Разделы бизнеса">
             <span>Обзор</span>
-            <span>Спрос</span>
-            <span>Предложения</span>
-            <span>Capacity</span>
+            <span>Доступный спрос</span>
+            <span>Торги</span>
+            <span>Мои предложения</span>
+            <span>Заявки и подключения</span>
+            <span>Квоты</span>
+            <span>Клиенты</span>
+            <span>Аналитика</span>
+            <span>Финансы</span>
+            <span>Отзывы</span>
+            <span>Команда</span>
+            <span>Документы</span>
+            <span>Настройки</span>
           </nav>
         </aside>
         <main className="bidly-unavailable-main" id="main-content">

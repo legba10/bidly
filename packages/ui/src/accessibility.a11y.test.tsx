@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import axe from 'axe-core';
 import { describe, expect, it } from 'vitest';
 
+import { BidlyMarketJourney } from './patterns/bidly-market-journey.js';
 import { DemandPulse } from './patterns/demand-pulse.js';
 import { IntegrationUnavailable } from './patterns/integration-unavailable.js';
 import { MarketProgress } from './patterns/market-progress.js';
@@ -35,6 +36,13 @@ describe('UI accessibility baseline', () => {
             { label: 'Компании делают предложения', state: 'current' },
           ]}
           title="Путь покупателя"
+        />
+        <BidlyMarketJourney
+          steps={[
+            { label: 'Опишите потребность', description: 'Укажите важные условия.' },
+            { label: 'Сравните варианты', description: 'Выбор остаётся за вами.' },
+          ]}
+          title="Как работает Bidly"
         />
       </main>,
     );
