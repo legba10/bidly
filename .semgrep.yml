@@ -1,0 +1,47 @@
+rules:
+  - id: bidly-no-eval
+    message: Dynamic code evaluation is forbidden in Bidly production source.
+    severity: ERROR
+    languages: [javascript, typescript]
+    patterns:
+      - pattern-either:
+          - pattern: eval(...)
+          - pattern: new Function(...)
+    paths:
+      include:
+        - apps
+        - packages
+
+  - id: bidly-no-child-process-shell
+    message: Shell execution with interpolated input can enable command injection; use fixed executable/argument APIs and review the boundary.
+    severity: ERROR
+    languages: [javascript, typescript]
+    patterns:
+      - pattern-either:
+          - pattern: child_process.exec(...)
+          - pattern: child_process.execSync(...)
+    paths:
+      include:
+        - apps
+        - packages
+
+  - id: bidly-no-dangerously-set-inner-html
+    message: Raw HTML needs an explicit approved sanitization design and security regression tests.
+    severity: ERROR
+    languages: [typescript]
+    pattern: <$X dangerouslySetInnerHTML={...} />
+    paths:
+      include:
+        - apps
+        - packages
+
+  - id: bidly-no-hardcoded-bearer
+    message: A bearer token appears to be hardcoded.
+    severity: ERROR
+    languages: [generic]
+    pattern-regex: '(?i)authorization\s*[:=]\s*["'']bearer\s+[a-z0-9._~+/-]{16,}'
+    paths:
+      include:
+        - apps
+        - packages
+        - infrastructure

@@ -1,0 +1,36 @@
+packages:
+  - apps/*
+  - packages/*
+
+minimumReleaseAge: 1440
+minimumReleaseAgeStrict: true
+minimumReleaseAgeIgnoreMissingTime: false
+
+# These exact releases were manually reviewed during bootstrap before they reached the default
+# 24-hour maturity window. Do not broaden an entry to a package-wide wildcard.
+minimumReleaseAgeExclude:
+  - '@storybook/addon-a11y@10.5.10'
+  - '@storybook/addon-vitest@10.5.10'
+  - '@storybook/builder-vite@10.5.10'
+  - '@storybook/csf-plugin@10.5.10'
+  - '@storybook/react-dom-shim@10.5.10'
+  - '@storybook/react-vite@10.5.10'
+  - '@storybook/react@10.5.10'
+  - storybook@10.5.10
+  - vite@8.2.2
+
+# Block non-registry transitive sources and re-check the lockfile instead of trusting it blindly.
+blockExoticSubdeps: true
+trustLockfile: false
+
+# pnpm 11 denies every dependency lifecycle script not explicitly reviewed here.
+strictDepBuilds: true
+allowBuilds:
+  esbuild@0.28.2: true
+  unrs-resolver@1.12.2: true
+
+# Never let `pnpm run` silently mutate an out-of-date dependency tree.
+verifyDepsBeforeRun: error
+
+patchedDependencies:
+  '@storybook/addon-vitest@10.5.10': patches/@storybook__addon-vitest@10.5.10.patch

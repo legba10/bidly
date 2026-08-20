@@ -1,0 +1,23 @@
+:root {
+  --bidly-color-background-primary: #f7f7f3;
+  --bidly-color-background-secondary: #eff2ee;
+  --bidly-color-surface: #ffffff;
+  --bidly-color-surface-raised: #ffffff;
+  --bidly-color-text-primary: #17201e;
+  --bidly-color-text-secondary: #46534f;
+  --bidly-color-text-muted: #68736f;
+  --bidly-color-border: #d8dedb;
+  --bidly-color-border-strong: #aab5b0;
+  --bidly-color-brand: #0c5b54;
+  --bidly-color-brand-hover: #084b45;
+  --bidly-color-on-brand: #ffffff;
+  --bidly-color-success: #176b4d;
+  --bidly-color-warning: #9a5c08;
+  --bidly-color-danger: #b12c35;
+  --bidly-color-info: #285e87;
+  --bidly-color-price-positive: #176b4d;
+  --bidly-color-auction-active: #285e87;
+  --bidly-color-capacity-low: #9a5c08;
+  --bidly-color-focus: #087f74;
+  --bidly-color-overlay: rgb(23 32 30 / 48%);
+}

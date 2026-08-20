@@ -1,0 +1,43 @@
+# Dependencies and package-manager state
+node_modules/
+.pnpm-store/
+
+# Build and test output
+.next/
+dist/
+storybook-static/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local tooling and editor state
+.tools/
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+tmp/
+
+# Infrastructure state must never be committed
+infrastructure/**/*.tfstate
+infrastructure/**/*.tfstate.*
+infrastructure/**/.terraform/
+infrastructure/**/.terraform.lock.hcl.backup
+infrastructure/**/crash.log
+

@@ -1,0 +1,21 @@
+:root {
+  --bidly-space-1: 0.25rem;
+  --bidly-space-2: 0.5rem;
+  --bidly-space-3: 0.75rem;
+  --bidly-space-4: 1rem;
+  --bidly-space-5: 1.5rem;
+  --bidly-space-6: 2rem;
+  --bidly-space-7: 3rem;
+  --bidly-space-8: 4rem;
+
+  --bidly-radius-sm: 0.25rem;
+  --bidly-radius-md: 0.5rem;
+  --bidly-radius-lg: 0.75rem;
+
+  --bidly-shadow-raised: 0 0.5rem 1.5rem rgb(23 32 30 / 7%);
+  --bidly-outline-focus: 0 0 0 0.1875rem rgb(8 127 116 / 28%);
+
+  --bidly-motion-fast: 120ms;
+  --bidly-motion-standard: 180ms;
+  --bidly-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+}

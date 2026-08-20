@@ -1,0 +1,20 @@
+title = "Bidly Gitleaks configuration"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Documented non-secret placeholder values"
+regexTarget = "match"
+regexes = [
+  '''BIDLY_PLACEHOLDER''',
+  '''example\.invalid'''
+]
+
+[[allowlists]]
+description = "Generated and locally installed dependencies are scanned at their own supply-chain boundary"
+paths = [
+  '''(^|[\\/])\.tools([\\/]|$)''',
+  '''(^|[\\/])node_modules([\\/]|$)''',
+  '''(^|[\\/])(?:dist|\.next|storybook-static|coverage|playwright-report|test-results)([\\/]|$)'''
+]

@@ -1,0 +1,26 @@
+{
+  "name": "@bidly/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev --hostname 127.0.0.1 --port 3000",
+    "prepare:standalone": "node scripts/prepare-standalone.mjs",
+    "start": "pnpm run prepare:standalone && node .next/standalone/apps/web/server.js",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@bidly/config": "workspace:*",
+    "@bidly/ui": "workspace:*",
+    "@bidly/validation": "workspace:*",
+    "next": "16.3.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "postcss": "8.5.26",
+    "tailwindcss": "4.3.3"
+  }
+}

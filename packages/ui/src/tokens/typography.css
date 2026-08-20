@@ -1,0 +1,26 @@
+:root {
+  --bidly-font-sans:
+    Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --bidly-font-display: var(--bidly-font-sans);
+
+  --bidly-text-display-size: clamp(2.25rem, 5vw, 4.25rem);
+  --bidly-text-display-line: 1.02;
+  --bidly-text-h1-size: clamp(2rem, 4vw, 3.25rem);
+  --bidly-text-h1-line: 1.08;
+  --bidly-text-h2-size: clamp(1.5rem, 3vw, 2.25rem);
+  --bidly-text-h2-line: 1.15;
+  --bidly-text-h3-size: 1.375rem;
+  --bidly-text-h3-line: 1.25;
+  --bidly-text-title-size: 1.125rem;
+  --bidly-text-title-line: 1.35;
+  --bidly-text-body-size: 1rem;
+  --bidly-text-body-line: 1.55;
+  --bidly-text-body-small-size: 0.875rem;
+  --bidly-text-body-small-line: 1.5;
+  --bidly-text-label-size: 0.875rem;
+  --bidly-text-label-line: 1.25;
+  --bidly-text-caption-size: 0.75rem;
+  --bidly-text-caption-line: 1.35;
+  --bidly-text-numeric-large-size: clamp(1.75rem, 4vw, 2.75rem);
+  --bidly-text-numeric-large-line: 1.05;
+}

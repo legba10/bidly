@@ -1,0 +1,72 @@
+name: Security baseline
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '23 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  security:
+    name: Secrets, dependencies, SAST, and IaC
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out complete history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python for isolated Semgrep
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+
+      - name: Install checksum-pinned security CLIs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          curl --fail --location --silent --show-error \
+            https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz \
+            --output /tmp/gitleaks.tar.gz
+          echo '551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  /tmp/gitleaks.tar.gz' | sha256sum --check --strict
+          tar --extract --gzip --file /tmp/gitleaks.tar.gz --directory /tmp gitleaks
+          sudo install --mode 0755 /tmp/gitleaks /usr/local/bin/gitleaks
+
+          curl --fail --location --silent --show-error \
+            https://github.com/google/osv-scanner/releases/download/v2.5.1/osv-scanner_linux_amd64 \
+            --output /tmp/osv-scanner
+          echo 'f9f25499a2c8cc367b3af45df2ea7eeca7fbccceab9c35079968f4b3652194be  /tmp/osv-scanner' | sha256sum --check --strict
+          sudo install --mode 0755 /tmp/osv-scanner /usr/local/bin/osv-scanner
+
+          curl --fail --location --silent --show-error \
+            https://github.com/aquasecurity/trivy/releases/download/v0.74.0/trivy_0.74.0_Linux-64bit.tar.gz \
+            --output /tmp/trivy.tar.gz
+          echo '2ae6fe3ee734b7fdf11335663e18c75ea12dccc76062f09f164a3b0f8be4371a  /tmp/trivy.tar.gz' | sha256sum --check --strict
+          tar --extract --gzip --file /tmp/trivy.tar.gz --directory /tmp trivy
+          sudo install --mode 0755 /tmp/trivy /usr/local/bin/trivy
+
+          python -m venv /tmp/semgrep
+          /tmp/semgrep/bin/python -m pip install --disable-pip-version-check --no-input semgrep==1.173.0
+          sudo ln --symbolic /tmp/semgrep/bin/semgrep /usr/local/bin/semgrep
+
+      - name: Scan files for secrets
+        run: gitleaks dir . --redact --no-banner --config .gitleaks.toml
+
+      - name: Scan Git history for secrets
+        run: gitleaks git . --redact --no-banner --config .gitleaks.toml
+
+      - name: Scan dependency lockfiles
+        run: osv-scanner scan source --recursive .
+
+      - name: Run rational Semgrep baseline
+        run: semgrep scan --config .semgrep.yml --error --metrics=off .
+
+      - name: Scan filesystem and IaC
+        run: trivy fs --scanners vuln,misconfig,secret --severity HIGH,CRITICAL --exit-code 1 --skip-dirs node_modules .

@@ -1,0 +1,12 @@
+.next
+.pnpm-store
+.tools
+coverage
+dist
+docs/api/openapi.v1.json
+apps/web/next-env.d.ts
+node_modules
+playwright-report
+pnpm-lock.yaml
+storybook-static
+test-results

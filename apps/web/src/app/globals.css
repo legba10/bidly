@@ -1,0 +1,52 @@
+@import 'tailwindcss';
+@import '@bidly/ui/styles.css';
+@source '../../../../packages/ui/src';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 20rem;
+  background: var(--bidly-color-background-primary);
+  color: var(--bidly-color-text-primary);
+  font-family: var(--bidly-font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 74%) 0, transparent 22rem),
+    var(--bidly-color-background-primary);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.bidly-skip-link {
+  position: fixed;
+  z-index: 100;
+  top: var(--bidly-space-3);
+  left: var(--bidly-space-3);
+  padding: var(--bidly-space-3) var(--bidly-space-4);
+  color: var(--bidly-color-on-brand);
+  background: var(--bidly-color-brand);
+  border-radius: var(--bidly-radius-md);
+  transform: translateY(-180%);
+}
+
+.bidly-skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,16 @@
+.git
+.github
+.next
+.tools
+coverage
+dist
+docs
+infrastructure
+node_modules
+playwright-report
+storybook-static
+test-results
+*.log
+.env*
+!.env.example
+
