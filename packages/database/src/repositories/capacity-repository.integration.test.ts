@@ -9,6 +9,7 @@ import { createDatabase, type BidlyDatabase } from '../kysely.js';
 import { migrateToLatest } from '../migrator.js';
 
 import { PostgresCapacityRepository } from './capacity-repository.js';
+import { PostgresOfferAcceptanceRepository } from './offer-acceptance-repository.js';
 
 const connectionString = process.env['TEST_DATABASE_URL'];
 
@@ -110,9 +111,22 @@ describe.runIf(Boolean(connectionString))(
           insert into offers(buyer_demand_id, buyer_id, allocation_candidate_id, status, expires_at)
           select candidate.buyer_demand_id, demand.buyer_id, candidate.id, 'AVAILABLE', now() + interval '1 hour'
           from candidate, demand returning id
+        ), offer_version as (
+          insert into offer_versions(
+            offer_id, version, supplier_organization_id, bid_version_id, category_version_id,
+            allocation_policy_version_id, capacity_unit_id, headline_minor, total_cost_minor,
+            currency, comparison_months, snapshot
+          )
+          select offer.id, 1, organization.id, bid_version.id, category_version.id,
+            policy_version.id, unit.id, 10000, 10000, 'RUB', 1, '{}'::jsonb
+          from offer, organization, bid_version, category_version, policy_version, unit
+          returning id
+        ), capacity_allocation as (
+          insert into capacity_allocations(capacity_unit_id, allocation_candidate_id, quantity)
+          select unit.id, candidate.id, 1 from unit, candidate returning id
         )
         select actor.id actor_id, demand.buyer_id, offer.id offer_id, unit.id unit_id
-        from actor, demand, offer, unit
+        from actor, demand, offer, unit, offer_version, capacity_allocation
       `,
           [
             randomUUID(),
@@ -233,6 +247,71 @@ describe.runIf(Boolean(connectionString))(
       ]);
       expect(audit.count).toBeGreaterThanOrEqual(2);
       expect(outbox.count).toBeGreaterThanOrEqual(2);
+    });
+
+    it('accepts an allocated offer atomically and rejects a changed replay payload', async () => {
+      const repository = new PostgresOfferAcceptanceRepository(database);
+      const actor: ActorContext = {
+        ...fixture.actor,
+        userId: fixture.buyerId,
+        sessionId: parseEntityId<'UserSession'>(randomUUID()),
+      };
+      const metadata = {
+        actor,
+        idempotencyKey: `accept-${randomUUID()}`,
+        payloadHash: createHash('sha256').update(`${fixture.offerId}:1`).digest('hex'),
+        requestedAt: toUtcInstant(new Date()),
+      };
+      await expect(
+        repository.acceptAtomically(fixture.offerId, fixture.buyerId, 1, {
+          ...metadata,
+          actor: fixture.actor,
+        }),
+      ).rejects.toMatchObject({ code: 'AUTHORIZATION_DENIED' });
+      const first = await repository.acceptAtomically(
+        fixture.offerId,
+        fixture.buyerId,
+        1,
+        metadata,
+      );
+      const replay = await repository.acceptAtomically(
+        fixture.offerId,
+        fixture.buyerId,
+        1,
+        metadata,
+      );
+      expect(first.offer.status).toBe('ACCEPTED');
+      expect(replay.reservationId).toBe(first.reservationId);
+      await expect(
+        repository.acceptAtomically(fixture.offerId, fixture.buyerId, 1, {
+          ...metadata,
+          payloadHash: createHash('sha256').update('changed-offer-accept-payload').digest('hex'),
+        }),
+      ).rejects.toMatchObject({ code: 'IDEMPOTENCY_CONFLICT' });
+
+      const [offer, unit, history, audit, outbox] = await Promise.all([
+        sql<{
+          readonly status: string;
+        }>`select status from offers where id = ${fixture.offerId}`.execute(database),
+        new PostgresCapacityRepository(database).findUnit(fixture.unitId),
+        sql<{ readonly count: number }>`
+          select count(*)::integer as count from offer_status_history
+          where offer_id = ${fixture.offerId} and to_status = 'ACCEPTED'
+        `.execute(database),
+        sql<{ readonly count: number }>`
+          select count(*)::integer as count from audit_events
+          where resource_type = 'Offer' and resource_id = ${fixture.offerId} and action = 'OFFER_ACCEPTED'
+        `.execute(database),
+        sql<{ readonly count: number }>`
+          select count(*)::integer as count from outbox_events
+          where aggregate_type = 'Offer' and aggregate_id = ${fixture.offerId} and event_type = 'OfferAccepted'
+        `.execute(database),
+      ]);
+      expect(offer.rows[0]?.status).toBe('ACCEPTED');
+      expect(unit?.reservedQuantity).toBe(1n);
+      expect(history.rows[0]?.count).toBe(1);
+      expect(audit.rows[0]?.count).toBe(1);
+      expect(outbox.rows[0]?.count).toBe(1);
     });
 
     it('rejects a second active booking for the same slot', async () => {

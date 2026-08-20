@@ -47,7 +47,7 @@ Zod command schemas generate OpenAPI 3.1 from one source. `/api/v1` currently ex
 
 Unit tests cover auction transitions, bid validation/total cost, eligibility and multi-winner allocation, supplier isolation and locked state, offer ownership/expiry/snapshot immutability, category validation, fulfillment confirmation/dispute, CPA eligibility, reliability scoring, and audited admin override contracts. API injection tests cover auth failure, safe errors, correlation IDs, validation, and the idempotency boundary.
 
-The PostgreSQL integration suite migrates an empty database, races two requests for the last capacity unit, verifies one winner, rejects payload-changing key reuse, verifies bounded TTL release/audit/outbox, and proves the active-slot booking uniqueness constraint. CI is configured to run it against PostgreSQL `18.4-alpine`. The local workstation used for this report has no Docker, PostgreSQL, Podman, or WSL distribution, so these two database-backed tests were discovered but skipped locally and cannot honestly be reported as executed.
+The PostgreSQL integration suite migrates an empty database, races two requests for the last capacity unit, verifies one winner, rejects payload-changing key reuse, verifies bounded TTL release/audit/outbox, accepts an allocation-backed offer atomically, and proves the active-slot booking uniqueness constraint. CI is configured to run it against PostgreSQL `18.4-alpine`. The local workstation used for this report has no Docker, PostgreSQL, Podman, or WSL distribution, so these three database-backed tests were discovered but skipped locally and cannot honestly be reported as executed.
 
 ## Final validation evidence
 
@@ -60,7 +60,7 @@ The PostgreSQL integration suite migrates an empty database, races two requests 
 | API production smoke                     | liveness `200`; unauthenticated `/api/v1/me` safe `401` with request ID                   |
 | Package/application/Storybook builds     | passed                                                                                    |
 | Gitleaks / OSV-Scanner / Semgrep / Trivy | passed after removing the vulnerable `@storybook/nextjs-vite → image-size` dev-only chain |
-| PostgreSQL 18 integration                | 1 file / 2 tests discovered and skipped locally; blocking CI job configured               |
+| PostgreSQL 18 integration                | 1 file / 3 tests discovered and skipped locally; blocking CI job configured               |
 
 `pnpm install --ignore-scripts` completed under the lockfile supply-chain policy. Lifecycle scripts for newly added runtime dependencies remained disabled; the reviewed bootstrap allowlist was not broadened.
 
@@ -73,7 +73,7 @@ The PostgreSQL integration suite migrates an empty database, races two requests 
 
 ## Known limitations and risks
 
-- Offer acceptance, booking, fulfillment, attribution, billing, auction, and admin repository transactions are specified as ports/schema but only capacity has a production PostgreSQL repository in this stage.
+- Offer acceptance and capacity reservation have production PostgreSQL transactions. Booking, fulfillment, attribution, billing, auction, and admin mutations remain specified as ports/schema until their complete transaction repositories and authorization policies are wired.
 - Authentication has secure-session-ready data/ports but no email/phone/SMS provider or credential flow; enabling it needs a dedicated threat-modelled decision.
 - Rate limiting is an interface, not a distributed implementation. Deployments must provide a durable/shared limiter before public writes are enabled.
 - Outbox persistence exists, but leasing/retry/notification workers are not implemented.

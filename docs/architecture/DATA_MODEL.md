@@ -89,7 +89,7 @@ All list APIs use a bounded limit and opaque cursor. Query repositories must bat
 | Accrue CPA          | require confirmed conversion and fulfillment evidence; create one CPA event; append balanced/compensating ledger entry                                  |
 | Admin override      | require admin + explicit reason/version; write mutation and previous/new safe values to audit atomically                                                |
 
-The implemented capacity repository demonstrates the lock/idempotency pattern. Remaining command repositories must use the same boundary before their HTTP endpoints are enabled.
+The implemented capacity and offer-acceptance repositories demonstrate the lock/idempotency pattern. Remaining command repositories must use the same boundary before their HTTP endpoints are enabled.
 
 ## Retention and deletion
 
