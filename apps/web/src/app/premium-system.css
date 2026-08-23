@@ -1,0 +1,595 @@
+:root {
+  color-scheme: dark;
+}
+
+body {
+  color: var(--bidly-color-text-primary);
+  background:
+    radial-gradient(circle at 82% -8%, rgb(123 97 255 / 11%), transparent 32rem),
+    var(--bidly-color-background-primary);
+}
+
+::selection {
+  color: #111408;
+  background: var(--bidly-color-brand);
+}
+
+/* Shared controls */
+.bidly-link-button--primary,
+.p5-market-filters button,
+.p5-card-action,
+.p5-business-demand article > a,
+.p5-inline-button,
+.p5-slot-grid button.is-selected {
+  color: var(--bidly-color-on-brand);
+  background: var(--bidly-color-brand);
+  border-color: var(--bidly-color-brand);
+  box-shadow: var(--bidly-glow-lime);
+}
+
+.p5-auction-grid .p5-card-action,
+.p5-demand-grid .p5-card-action,
+.p5-business-card-grid .p5-card-action {
+  color: var(--bidly-color-on-brand);
+  background: var(--bidly-color-brand);
+  border-color: var(--bidly-color-brand);
+}
+
+.bidly-link-button--primary:hover,
+.p5-market-filters button:hover,
+.p5-card-action:hover,
+.p5-business-demand article > a:hover,
+.p5-inline-button:hover {
+  color: var(--bidly-color-on-brand);
+  background: var(--bidly-color-brand-hover);
+  border-color: var(--bidly-color-brand-hover);
+  transform: translateY(-1px);
+}
+
+.bidly-link-button--secondary,
+.bidly-button[data-variant='secondary'],
+.bidly-button[data-variant='quiet'] {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-surface);
+  border-color: var(--bidly-color-border-strong);
+}
+
+.bidly-link-button--quiet {
+  color: var(--bidly-color-text-primary);
+  background: transparent;
+}
+
+.bidly-link-button:active,
+.bidly-button:active:not(:disabled),
+.p5-market-filters button:active {
+  transform: translateY(0);
+}
+
+.bidly-link-button:focus-visible,
+.bidly-button:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--bidly-color-focus);
+  outline-offset: 3px;
+}
+
+input,
+select,
+textarea,
+.p5-market-filters input,
+.p5-market-filters select,
+.p5-login-card input,
+.p5-appbar input,
+.p5-business-topbar input {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-background-secondary);
+  border: 1px solid var(--bidly-color-border);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--bidly-color-text-muted);
+  opacity: 1;
+}
+
+/* One intentional public header state, with a restrained elevated scroll state. */
+.bidly-public-header[data-tone] {
+  min-height: 4.75rem;
+  color: var(--bidly-color-text-primary);
+  background: rgb(7 8 18 / 78%);
+  border-bottom: 1px solid var(--bidly-color-border);
+  box-shadow: none;
+  backdrop-filter: blur(1rem) saturate(125%);
+}
+
+.bidly-public-header[data-tone][data-scrolled='true'] {
+  background: rgb(7 8 18 / 94%);
+  border-bottom-color: var(--bidly-color-border-strong);
+  box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 18%);
+  backdrop-filter: blur(1.2rem) saturate(130%);
+}
+
+.bidly-public-header[data-tone] .bidly-public-header__inner {
+  width: min(calc(100% - (var(--bidly-layout-page-gutter) * 2)), 92rem);
+  min-height: 4.75rem;
+}
+
+.bidly-public-header__brand,
+.p5-auth-brand,
+.p5-buyer-sidebar > a,
+.p5-business-sidebar > a {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.bidly-public-header[data-tone] .bidly-public-header__nav a,
+.bidly-public-header[data-tone] .bidly-link-button--quiet {
+  color: var(--bidly-color-text-secondary);
+  background: transparent;
+}
+
+.bidly-public-header[data-tone] .bidly-public-header__nav a:hover,
+.bidly-public-header[data-tone] .bidly-link-button--quiet:hover {
+  color: var(--bidly-color-text-primary);
+  background: transparent;
+}
+
+.bidly-public-header[data-tone] .bidly-public-header__menu summary {
+  color: var(--bidly-color-text-primary);
+  background: transparent;
+  border-color: var(--bidly-color-border-strong);
+}
+
+.bidly-public-header[data-tone] .bidly-public-header__menu nav {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-surface-raised);
+  border-color: var(--bidly-color-border);
+}
+
+.bidly-public-header[data-tone] .bidly-public-header__menu nav a {
+  color: var(--bidly-color-text-secondary);
+}
+
+/* Shared dark footer: no legacy light strip on any route. */
+.bidly-public-footer[data-tone] {
+  width: min(calc(100% - (var(--bidly-layout-page-gutter) * 2)), 92rem);
+  padding-block: clamp(3rem, 6vw, 5rem);
+  color: var(--bidly-color-text-secondary);
+  background: transparent;
+  border-top: 1px solid var(--bidly-color-border);
+}
+
+.bidly-public-footer[data-tone]::before {
+  position: absolute;
+  top: 0;
+  right: 50%;
+  bottom: 0;
+  left: 50%;
+  z-index: -1;
+  width: 100vw;
+  content: '';
+  background: #05060d;
+  transform: translateX(-50%);
+}
+
+.bidly-public-footer {
+  position: relative;
+  z-index: 0;
+}
+
+.bidly-public-footer[data-tone] .bidly-public-footer__links p,
+.bidly-public-footer[data-tone] .bidly-public-footer__links a,
+.bidly-public-footer[data-tone] .bidly-public-footer__brand p {
+  color: var(--bidly-color-text-secondary);
+}
+
+.bidly-public-footer[data-tone] .bidly-public-footer__links p {
+  color: var(--bidly-color-text-primary);
+}
+
+.bidly-public-footer[data-tone] a:hover {
+  color: var(--bidly-color-brand);
+}
+
+/* Public information, market, legal, support and category routes. */
+.bidly-information-page,
+.bidly-unavailable-main,
+.p5-market-page,
+.p5-category-page,
+.p5-info-page,
+.p5-detail-page {
+  color: var(--bidly-color-text-primary);
+  background:
+    radial-gradient(circle at 86% 0, rgb(123 97 255 / 9%), transparent 28rem),
+    var(--bidly-color-background-primary);
+}
+
+.bidly-information-page,
+.p5-market-page,
+.p5-category-page,
+.p5-info-page {
+  width: min(calc(100% - (var(--bidly-layout-page-gutter) * 2)), 80rem);
+}
+
+.bidly-information-page__intro > p:not(.bidly-eyebrow),
+.p5-market-hero > div > p:last-child,
+.p5-category-hero > div > p,
+.p5-info-hero > p,
+.p5-about-hero > div:first-child > p:last-child,
+.p5-section__heading > div > p:last-child,
+.p5-support-grid p,
+.p5-about-story p,
+.p5-about-model p {
+  color: var(--bidly-color-text-secondary);
+}
+
+.bidly-eyebrow,
+.p5-about-story article > span {
+  color: var(--bidly-color-brand);
+}
+
+.bidly-information-page__points article,
+.bidly-integration-unavailable,
+.p5-market-filters,
+.p5-market-empty,
+.p5-category-hero aside,
+.p5-category-mechanics,
+.p5-journey-explorer__tabs button,
+.p5-journey-explorer__panel,
+.p5-trust article,
+.p5-about-story article,
+.p5-about-model,
+.p5-support-grid article,
+.p5-faq details,
+.p5-support-note,
+.p5-login-card,
+.p5-detail-hero,
+.p5-offer-detail,
+.p5-list-header,
+.p5-savings-hero,
+.p5-detail-card,
+.p5-offer-detail-grid > section,
+.p5-offer-detail-grid > aside,
+.p5-booking-grid > div,
+.p5-booking-grid > aside,
+.p5-auction-stats article,
+.p5-savings-breakdown article {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-surface);
+  border: 1px solid var(--bidly-color-border);
+  box-shadow: var(--bidly-shadow-subtle);
+}
+
+.p5-detail-card aside,
+.p5-booking-hero {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-surface-raised);
+  border: 1px solid var(--bidly-color-border);
+}
+
+.p5-savings-breakdown i {
+  background: var(--bidly-color-border-strong);
+}
+
+.p5-section--tinted,
+.p5-category-offers,
+.p5-info-trust,
+.p5-about-principles,
+.p5-category-faq,
+.p5-support-faq {
+  background: var(--bidly-color-background-secondary);
+  border-color: var(--bidly-color-border);
+}
+
+.p5-market-filters label,
+.p5-market-filters span,
+.p5-category-hero aside p,
+.p5-category-hero aside small,
+.p5-journey-explorer__panel p,
+.p5-faq details p,
+.p5-support-note p,
+.p5-detail-hero p,
+.p5-offer-detail p,
+.p5-list-header p,
+.p5-savings-hero p {
+  color: var(--bidly-color-text-secondary);
+}
+
+.p5-journey-explorer__visual > span:not(.p5-journey-explorer__pulse) {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-surface-raised);
+  border: 1px solid var(--bidly-color-border);
+}
+
+.p5-about-hero > div:last-child {
+  background:
+    radial-gradient(circle at 78% 20%, rgb(123 97 255 / 14%), transparent 16rem),
+    var(--bidly-color-background-secondary);
+  border: 1px solid var(--bidly-color-border);
+  box-shadow: var(--bidly-glow-violet);
+}
+
+.p5-about-hero .bidly-brand-logo[data-variant='lockup-on-dark'] {
+  width: min(100%, 30rem);
+}
+
+/* Auth remains focused, but uses the same surfaces and brand accents. */
+.p5-auth-page {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-background-primary);
+}
+
+.p5-auth-story {
+  background:
+    radial-gradient(circle at 12% 100%, rgb(123 97 255 / 19%), transparent 32rem),
+    radial-gradient(circle at 95% 8%, rgb(198 255 0 / 7%), transparent 24rem), #070812;
+}
+
+.p5-auth-panel {
+  background: var(--bidly-color-background-secondary);
+}
+
+.p5-auth-panel-brand {
+  display: none;
+}
+
+.p5-auth-visual > div {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-surface-raised);
+  border: 1px solid var(--bidly-color-border);
+}
+
+.p5-auth-visual > div span,
+.p5-auth-visual > div small,
+.p5-login-card p,
+.p5-login-card small {
+  color: var(--bidly-color-text-secondary);
+}
+
+/* Buyer account */
+.p5-buyer-shell,
+.p5-buyer-main {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-background-primary);
+}
+
+.p5-buyer-sidebar {
+  color: var(--bidly-color-text-secondary);
+  background: #05060d;
+  border-right: 1px solid var(--bidly-color-border);
+}
+
+.p5-buyer-logo-mark {
+  display: none;
+}
+
+.p5-buyer-sidebar nav a {
+  color: var(--bidly-color-text-secondary);
+}
+
+.p5-buyer-sidebar nav a:first-child,
+.p5-buyer-sidebar nav a:hover {
+  color: var(--bidly-color-text-primary);
+  background: rgb(198 255 0 / 8%);
+}
+
+.p5-buyer-sidebar__help {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-surface);
+  border: 1px solid var(--bidly-color-border);
+}
+
+.p5-appbar,
+.p5-business-topbar {
+  color: var(--bidly-color-text-primary);
+  background: rgb(11 13 24 / 88%);
+  border-bottom: 1px solid var(--bidly-color-border);
+  box-shadow: none;
+  backdrop-filter: blur(1rem);
+}
+
+.p5-buyer-dashboard,
+.p5-detail-page,
+.p5-business-page {
+  background: var(--bidly-color-background-primary);
+}
+
+.p5-buyer-welcome article,
+.p5-dashboard-section,
+.p5-dashboard-aside > section,
+.p5-decision-list article,
+.p5-detail-hero > div:last-child,
+.p5-offer-detail > div:last-child,
+.p5-list-header > aside,
+.p5-comparison-note {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-surface);
+  border-color: var(--bidly-color-border);
+  box-shadow: var(--bidly-shadow-subtle);
+}
+
+.p5-buyer-welcome > div > p,
+.p5-buyer-welcome article span,
+.p5-buyer-welcome article small,
+.p5-decision-list small,
+.p5-decision-list span,
+.p5-dashboard-aside p {
+  color: var(--bidly-color-text-secondary);
+}
+
+.p5-buyer-bottom-nav {
+  color: var(--bidly-color-text-secondary);
+  background: rgb(7 8 18 / 96%);
+  border-top: 1px solid var(--bidly-color-border);
+}
+
+/* Business account */
+.p5-business-shell,
+.p5-business-main {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-background-primary);
+}
+
+.p5-business-sidebar {
+  background: #05060d;
+  border-right: 1px solid var(--bidly-color-border);
+}
+
+.p5-business-sidebar nav a {
+  color: var(--bidly-color-text-secondary);
+}
+
+.p5-business-sidebar nav a[data-active='true'],
+.p5-business-sidebar nav a:hover {
+  color: #111408;
+  background: var(--bidly-color-brand);
+}
+
+.p5-business-company,
+.p5-business-manager {
+  background: var(--bidly-color-surface);
+  border: 1px solid var(--bidly-color-border);
+}
+
+.p5-business-panel,
+.p5-business-metrics .bidly-business-metric,
+.p5-stage-board > section,
+.p5-stage-board article,
+.p5-panel-note,
+.p5-data-table,
+.p5-directory-list article,
+.p5-business-panel blockquote {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-surface);
+  border-color: var(--bidly-color-border);
+  box-shadow: var(--bidly-shadow-subtle);
+}
+
+.p5-business-demand > article,
+.p5-business-offer-table > div,
+.p5-request-list > div,
+.p5-data-table > div {
+  border-color: var(--bidly-color-border);
+}
+
+.p5-business-panel header button,
+.p5-data-table__head,
+.p5-request-list > div > span {
+  color: var(--bidly-color-text-secondary);
+  background: var(--bidly-color-background-secondary);
+  border: 1px solid var(--bidly-color-border);
+}
+
+.p5-business-panel header button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.p5-quota i,
+.p5-rating-row i {
+  background: var(--bidly-color-background-secondary);
+}
+
+.p5-business-page-header p,
+.p5-business-demand small,
+.p5-business-offer-table span,
+.p5-business-panel blockquote p,
+.p5-request-list small,
+.p5-directory-list small,
+.p5-directory-list p {
+  color: var(--bidly-color-text-secondary);
+}
+
+.bidly-demand-card,
+.bidly-auction-card,
+.bidly-offer-card,
+.bidly-business-metric,
+.bidly-surface {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-surface);
+  border-color: var(--bidly-color-border);
+}
+
+.bidly-demand-card__numbers div,
+.bidly-offer-card__total,
+.bidly-market-progress__index {
+  background: var(--bidly-color-background-secondary);
+}
+
+.bidly-business-unavailable {
+  background: var(--bidly-color-background-primary);
+}
+
+.bidly-business-unavailable__rail {
+  background: #05060d;
+  border-right: 1px solid var(--bidly-color-border);
+}
+
+@media (max-width: 48rem) {
+  .bidly-public-header[data-tone],
+  .bidly-public-header[data-tone] .bidly-public-header__inner {
+    min-height: 4.25rem;
+  }
+
+  .bidly-public-header[data-tone] .bidly-brand-logo__image {
+    height: 1.75rem;
+  }
+
+  .bidly-public-footer[data-tone] {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bidly-public-footer__brand {
+    grid-column: 1 / -1;
+  }
+
+  .p5-auth-panel {
+    order: -1;
+    min-height: 100svh;
+    align-content: center;
+  }
+
+  .p5-auth-panel-brand {
+    display: inline-flex;
+    width: fit-content;
+  }
+
+  .p5-auth-story {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 64rem) and (min-width: 48.0625rem) {
+  .p5-buyer-logo-full {
+    display: none;
+  }
+
+  .p5-buyer-logo-mark {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 30rem) {
+  .bidly-public-footer[data-tone] {
+    grid-template-columns: 1fr;
+  }
+
+  .bidly-public-footer__brand {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

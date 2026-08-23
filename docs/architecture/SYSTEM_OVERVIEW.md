@@ -15,7 +15,7 @@ Russian DDoS/WAF/CDN (as required) → Load balancer
                                               └─ S3-compatible object storage
 ```
 
-Only the technical web page and liveness/readiness API exist today. PostgreSQL, Redis, object storage, queues, authentication, and product modules are architectural targets, not running integrations.
+The web app now includes public, buyer and supplier presentation shells plus local-only deterministic adapters. Production PostgreSQL, Redis, object storage, queues, identity and organization-scoped product read models remain architectural targets rather than live integrations.
 
 ## Repository boundaries
 

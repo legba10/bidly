@@ -1,10 +1,12 @@
-# UX implementation report
+# UX implementation report (pre-LOLO2 baseline)
+
+This report is retained as implementation history. The homepage and brand-media sections were superseded on 2026-08-23 by the LOLO2 rebuild. Current evidence is recorded in `docs/design/LOLO2_BEFORE_AFTER.md`, `docs/design/HERO_MEDIA_AUDIT.md` and `docs/engineering/LOLO2_FINAL_REPORT.md`.
 
 **Status:** implementation foundation complete; data-driven marketplace work blocked by unpublished read/auth contracts.
 
 ## Design system
 
-The visual system turns the supplied references into reusable semantic tokens: bright buyer canvas, cobalt/indigo action, deep-ink typography, cool borders, restrained elevation and a dark navy business rail. `@bidly/ui` owns tokens, a text-plus-shape status primitive, an internal outlined SVG icon set, brand logo/mark, demand pulse, market progress and a safe unavailable-integration pattern. No external icon, chart, image or font dependency was added.
+The visual system turns the supplied references into reusable semantic tokens: deep navy/black canvases, lime action, electric blue/violet accents, off-white typography, subtle borders and restrained elevation across public, buyer and business surfaces. `@bidly/ui` owns tokens, a text-plus-shape status primitive, an internal outlined icon set, approved raster logo/mark, demand pulse, market progress and a safe unavailable-integration pattern. No external icon, chart or font dependency was added.
 
 ## Buyer UX
 

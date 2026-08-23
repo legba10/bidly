@@ -16,7 +16,8 @@ Bidly is expected to become a high-value, multi-tenant consumer marketplace proc
 - Storybook/axe and Playwright security-header smoke tests;
 - `.env.example` contains non-secret local defaults only;
 - provider/payment/storage contracts have no vendor implementations;
-- no authentication, product mutation, database, upload, webhook, payment, or PII collection surface exists.
+- no production authentication, product mutation, database, upload, webhook, payment, or PII collection surface exists;
+- the web app has an explicitly development-only phone challenge adapter for local visual QA: production returns 404, identifiers are one-way hashed, challenges/attempts/session lifetime are bounded, sessions are random and HttpOnly/SameSite, state-changing routes enforce same-origin, and no request body, phone, code or cookie is logged. It is not a production identity design.
 
 ## Required before each surface exists
 

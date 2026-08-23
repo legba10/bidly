@@ -1,0 +1,92 @@
+[
+  {
+    "width": 1920,
+    "height": 1080,
+    "headingVisible": true,
+    "heroReady": true,
+    "horizontalOverflow": false,
+    "scrollScrubRegionCount": 0,
+    "videoCount": 0,
+    "consoleErrors": []
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "headingVisible": true,
+    "heroReady": true,
+    "horizontalOverflow": false,
+    "scrollScrubRegionCount": 0,
+    "videoCount": 0,
+    "consoleErrors": []
+  },
+  {
+    "width": 1366,
+    "height": 768,
+    "headingVisible": true,
+    "heroReady": true,
+    "horizontalOverflow": false,
+    "scrollScrubRegionCount": 0,
+    "videoCount": 0,
+    "consoleErrors": []
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "headingVisible": true,
+    "heroReady": true,
+    "horizontalOverflow": false,
+    "scrollScrubRegionCount": 0,
+    "videoCount": 0,
+    "consoleErrors": []
+  },
+  {
+    "width": 1024,
+    "height": 768,
+    "headingVisible": true,
+    "heroReady": true,
+    "horizontalOverflow": false,
+    "scrollScrubRegionCount": 0,
+    "videoCount": 0,
+    "consoleErrors": []
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "headingVisible": true,
+    "heroReady": true,
+    "horizontalOverflow": false,
+    "scrollScrubRegionCount": 0,
+    "videoCount": 0,
+    "consoleErrors": []
+  },
+  {
+    "width": 430,
+    "height": 932,
+    "headingVisible": true,
+    "heroReady": true,
+    "horizontalOverflow": false,
+    "scrollScrubRegionCount": 0,
+    "videoCount": 0,
+    "consoleErrors": []
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "headingVisible": true,
+    "heroReady": true,
+    "horizontalOverflow": false,
+    "scrollScrubRegionCount": 0,
+    "videoCount": 0,
+    "consoleErrors": []
+  },
+  {
+    "width": 375,
+    "height": 812,
+    "headingVisible": true,
+    "heroReady": true,
+    "horizontalOverflow": false,
+    "scrollScrubRegionCount": 0,
+    "videoCount": 0,
+    "consoleErrors": []
+  }
+]

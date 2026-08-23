@@ -3,10 +3,12 @@ import Link from 'next/link';
 
 import { ruRU } from '../i18n/messages/ru-RU';
 
-export function PublicHeader() {
+import { PublicHeaderScrollState } from './public-header-scroll-state';
+
+export function PublicHeader({ tone = 'dark' }: { readonly tone?: 'dark' | 'light' }) {
   const messages = ruRU.shared;
   const navigation = [
-    { href: '/#how-it-works', label: messages.howItWorks },
+    { href: '/how-it-works', label: messages.howItWorks },
     { href: '/market', label: messages.market },
     { href: '/business-info', label: messages.business },
     { href: '/about', label: messages.about },
@@ -14,10 +16,11 @@ export function PublicHeader() {
   ];
 
   return (
-    <header className="bidly-public-header">
+    <header className="bidly-public-header" data-tone={tone} id="bidly-public-header">
+      <PublicHeaderScrollState headerId="bidly-public-header" />
       <div className="bidly-public-header__inner">
         <Link className="bidly-public-header__brand" href="/">
-          <BrandLogo />
+          <BrandLogo variant={tone === 'dark' ? 'on-dark' : 'on-light'} />
         </Link>
         <nav aria-label="Основная навигация" className="bidly-public-header__nav">
           {navigation.map((item) => (
@@ -44,6 +47,10 @@ export function PublicHeader() {
                   {item.label}
                 </Link>
               ))}
+              <Link href="/login">{messages.signIn}</Link>
+              <Link className="bidly-public-header__mobile-cta" href="/market">
+                {ruRU.landing.primaryAction}
+              </Link>
             </nav>
           </details>
         </div>
@@ -52,7 +59,7 @@ export function PublicHeader() {
   );
 }
 
-export function PublicFooter() {
+export function PublicFooter({ tone = 'dark' }: { readonly tone?: 'dark' | 'light' }) {
   const legalLinks = [
     { href: '/legal/terms', label: 'Пользовательское соглашение' },
     { href: '/legal/privacy', label: 'Политика конфиденциальности' },
@@ -60,15 +67,15 @@ export function PublicFooter() {
   ];
 
   return (
-    <footer className="bidly-public-footer">
+    <footer className="bidly-public-footer" data-tone={tone}>
       <div className="bidly-public-footer__brand">
-        <BrandLogo />
+        <BrandLogo variant={tone === 'dark' ? 'on-dark' : 'on-light'} />
         <p>{ruRU.landing.footer}</p>
       </div>
       <nav aria-label="Покупателям" className="bidly-public-footer__links">
         <p>Покупателям</p>
         <Link href="/market">Рынок</Link>
-        <Link href="/#how-it-works">Как это работает</Link>
+        <Link href="/how-it-works">Как это работает</Link>
         <Link href="/support">Поддержка</Link>
       </nav>
       <nav aria-label="Бизнесу" className="bidly-public-footer__links">

@@ -1,0 +1,12 @@
+html,
+body,
+#storybook-root,
+.sb-show-main,
+.docs-story {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-background-primary);
+}
+
+#storybook-root {
+  min-height: 100vh;
+}

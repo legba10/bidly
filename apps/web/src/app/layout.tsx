@@ -4,6 +4,8 @@ import type { ReactNode } from 'react';
 import { ruRU } from '../i18n/messages/ru-RU';
 import './globals.css';
 import './landing.css';
+import './home-premium.css';
+import './premium-system.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env['NEXT_PUBLIC_SITE_URL'] ?? 'http://localhost:3000'),
@@ -19,7 +21,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     description: ruRU.metadata.description,
-    images: [{ alt: 'Bidly — компании конкурируют за ваш выбор', url: '/brand/bidly-og.svg' }],
+    images: [
+      { alt: 'Bidly — компании конкурируют за ваш выбор', url: '/brand/bidly-og-1200x630.png' },
+    ],
     title: ruRU.metadata.title,
     type: 'website',
   },

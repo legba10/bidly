@@ -5,12 +5,15 @@
   "type": "module",
   "scripts": {
     "brand:assets": "node scripts/generate-brand-assets.mjs",
+    "brand:inventory": "node scripts/generate-brand-inventory.mjs",
     "build": "next build",
     "dev": "next dev --hostname 127.0.0.1 --port 3000",
     "prepare:standalone": "node scripts/prepare-standalone.mjs",
+    "hero:assets": "node scripts/generate-hero-assets.mjs",
     "start": "pnpm run prepare:standalone && node .next/standalone/apps/web/server.js",
     "typecheck": "tsc -p tsconfig.json",
-    "visual:capture": "node scripts/capture-prompt4-visuals.mjs"
+    "visual:capture": "node scripts/capture-prompt5-visuals.mjs",
+    "visual:capture:prompt4": "node scripts/capture-prompt4-visuals.mjs"
   },
   "dependencies": {
     "@bidly/config": "workspace:*",
@@ -24,6 +27,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "4.3.3",
     "postcss": "8.5.26",
+    "sharp": "0.35.3",
     "tailwindcss": "4.3.3"
   }
 }

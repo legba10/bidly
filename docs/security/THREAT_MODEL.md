@@ -55,6 +55,13 @@ CI/build boundary ─────────── no production data or long-l
 | Resource exhaustion/bot demand manipulation              | outage, distorted demand/cost                       | layered rate/bot controls, verification, quotas, bounded queries/payloads, anomaly monitoring                                |
 | Backup compromise or untested recovery                   | permanent data loss/extortion                       | isolated encrypted backups, separated rights, PITR, restore exercises, rotation/incident runbook                             |
 | Provider outage/control-plane denial                     | service loss                                        | multi-AZ initial topology, tested backups, portable artifacts/data, provider exit plan; no premature multi-cloud claims      |
+| DEV challenge/session accidentally exposed in production | fixed-code account bypass or false identity trust   | `NODE_ENV=development` + demo-mode gate; production 404 on every route; no production actor/org use; build/E2E regression    |
+
+## Local DEV authentication flow
+
+The Prompt №5 visual demo adds an in-memory, single-process development boundary only. It accepts a Russian-format phone value, immediately replaces it with a salted-purpose SHA-256 digest, returns a fixed code visibly as DEV-only UI, limits challenge creation and verification attempts, expires challenges after five minutes and sessions after eight hours, and stores a random session identifier in an HttpOnly, SameSite=Lax cookie. Request, verify and logout enforce same-origin. Production mode returns 404 and buyer production routes remain unavailable.
+
+Residual risk is accepted only for local synthetic-data review: in-memory rate limits are not distributed, the fixed code is not authentication, sessions have no durable revocation/account identity and `Secure` is false for local HTTP. None of those properties may cross into a deployed identity system. Tests cover the environment gate, invalid input, one-time challenge replay, attempt bounds, session validation and revocation.
 
 ## Security assumptions to challenge
 

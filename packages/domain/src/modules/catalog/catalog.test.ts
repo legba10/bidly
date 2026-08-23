@@ -7,11 +7,13 @@ import {
 } from './index.js';
 
 describe('category definitions', () => {
-  it('provides the three DEV category definitions without a category switch', () => {
+  it('provides the five explicit DEV category definitions without collapsing market types', () => {
     expect(developmentCategoryFixtures.map((category) => category.slug)).toEqual([
       'home_internet',
+      'mobile_connection',
       'dental_hygiene',
       'fitness',
+      'tire_service',
     ]);
   });
 

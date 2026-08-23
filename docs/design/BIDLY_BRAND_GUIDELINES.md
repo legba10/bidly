@@ -1,29 +1,26 @@
 # Bidly brand guidelines
 
-## Core mark
+## Знак и композиция
 
-The Bidly mark is a vector-first folded ribbon `B`. It communicates individual buyer signals becoming stronger collective demand, rather than crypto, AI, fintech, or a generic letterform. The master is [`packages/ui/brand/bidly-mark.svg`](../../packages/ui/brand/bidly-mark.svg); interface code uses `BrandMark`, `BrandWordmark`, and `BrandLogo` from `@bidly/ui`.
+Единственный production‑источник — оригинальные PNG из LOLO2: градиентная буква‑стрелка и готовое слово `BIDLY`. Нельзя рисовать знак кодом, трассировать, менять геометрию стрелки, заменять шрифт wordmark или экспортировать бренд из screenshot.
 
-## Composition and usage
+- На светлом фоне используется `bidly-logo-on-light`.
+- На тёмном фоне используется `bidly-logo-on-dark`.
+- Только в компактных технических поверхностях допустим знак, вырезанный из того же оригинала.
+- Минимальная ширина полного логотипа — 96 CSS px; вокруг сохраняется не менее трети высоты знака.
 
-- `BrandMark` is decorative by default. `BrandLogo` is the named composite used when Bidly must be announced to assistive technology.
-- Place the mark to the left of the `BIDLY` wordmark; use the mark alone only where space is genuinely constrained (favicon, app icon, compact navigation).
-- Keep clear space of at least one third of the mark’s visible height on every side.
-- The full logo must be at least 80 CSS pixels wide; the mark must be at least 20 CSS pixels high. Use the supplied small raster mark at 16 pixels, not a squeezed full wordmark.
-- On light surfaces the wordmark uses deep ink. On dark surfaces use `BrandLogo tone="light"`; the coloured ribbon remains unchanged.
+## Цвет
 
-## Colour
+Основной язык — `#070812`, `#0B0D18`, `#11131E`, белый текст и лаймовый action `#C6FF00`. Violet/blue показывают технологическую инфраструктуру. Lime обозначает действие, пользу и активное состояние, но не заполняет весь интерфейс.
 
-The controlled brand palette is: deep navy `#0B0F18`, electric blue `#0A1BFF`, blue `#206BFF`, cyan `#00D4FF`, and restrained violet `#7B61FF`. Product code consumes semantic UI tokens rather than these raw values. Violet and cyan are internal ribbon depth accents, not status colours or a page-wide gradient.
+## Hero и motion
 
-## Forbidden use
+Hero использует утверждённый статичный 4K‑кадр LOLO2. Видео, scroll scrub, fake 3D и canvas‑реконструкция отсутствуют. Motion разрешён только для коротких UI‑состояний и отключается через `prefers-reduced-motion`. Подробности: `BIDLY_HERO_MOTION.md`.
 
-- Do not crop the supplied reference image, use a JPEG logo, flatten the mark onto a background, recolour it arbitrarily, stretch it, add strokes, or replace it with a generic `B`.
-- Do not use the mark as a busy background, repeat it as texture, turn it into a spinner, or make it a permanent glow/pulse.
-- Do not imply a crypto, Web3, exchange, AI assistant, or lowest-price-only product.
+## Запрещено
 
-## Motion architecture
-
-`AnimatedBrandHero` accepts optional WebM, MP4 and poster sources. Without approved media it renders the static master mark. It observes viewport visibility and opts out for `prefers-reduced-motion` and Save-Data users. The future asset contract is documented in [`apps/web/public/brand/motion/README.md`](../../apps/web/public/brand/motion/README.md).
-
-Navigation-logo interaction is limited to a 180ms one-pixel elevation and very slight colour-depth response. It is disabled with reduced motion.
+- старый ribbon/cube‑бренд и автотрейс `лого.svg` в runtime;
+- fake‑логотип или текстовая буква вместо изображения;
+- деформация, recolor, декоративный loop и случайный неон;
+- Web3/crypto/AI‑метафоры, не объясняющие обратный спрос;
+- белый bbox или несогласованная тёмная плашка вокруг логотипа.

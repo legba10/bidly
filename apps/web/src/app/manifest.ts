@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       'Платформа, где покупатели объединяют спрос, а компании конкурируют полными условиями.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#f7f8ff',
-    theme_color: '#0a1bff',
+    background_color: '#070812',
+    theme_color: '#070812',
     icons: [
       {
         src: '/pwa-192x192.png',
@@ -24,6 +24,12 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         src: '/pwa-maskable-512x512.png',
         sizes: '512x512',
+        purpose: 'maskable',
+        type: 'image/png',
+      },
+      {
+        src: '/pwa-maskable-192x192.png',
+        sizes: '192x192',
         purpose: 'maskable',
         type: 'image/png',
       },

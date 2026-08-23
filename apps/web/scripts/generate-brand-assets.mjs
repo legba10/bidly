@@ -1,44 +1,34 @@
-import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { chromium } from 'playwright';
+import sharp from 'sharp';
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const appDirectory = resolve(scriptDirectory, '..');
-const workspaceDirectory = resolve(appDirectory, '..', '..');
-const sourceDirectory = resolve(workspaceDirectory, 'packages', 'ui', 'brand');
+const sourceDirectory = resolve(appDirectory, 'brand-source');
 const outputDirectory = resolve(appDirectory, 'public', 'brand');
+const publicDirectory = resolve(appDirectory, 'public');
+const routeAssetsDirectory = resolve(appDirectory, 'src', 'app');
 
-const markSource = resolve(sourceDirectory, 'bidly-mark.svg');
-const logoSource = resolve(sourceDirectory, 'bidly-logo.svg');
-const ogSource = resolve(sourceDirectory, 'bidly-og.svg');
-
-const pngSizes = [32, 64, 128, 256, 512, 1024];
-const webpSizes = [256, 512, 1024];
-
-function toDataUrl(source, type = 'image/svg+xml') {
-  return `data:${type};base64,${Buffer.from(source).toString('base64')}`;
-}
-
-function fromDataUrl(dataUrl) {
-  const separator = dataUrl.indexOf(',');
-  if (separator === -1) throw new Error('Expected a base64 data URL');
-  return Buffer.from(dataUrl.slice(separator + 1), 'base64');
-}
+const lolo2SourceDirectory = resolve(sourceDirectory, 'lolo2');
+const markSource = resolve(lolo2SourceDirectory, 'bidly-mark-transparent-master.png');
+const logoOnLightSource = resolve(lolo2SourceDirectory, 'bidly-logo-on-light-master.png');
+const logoOnDarkSource = resolve(lolo2SourceDirectory, 'bidly-logo-on-dark-master.png');
+const lockupOnLightSource = resolve(lolo2SourceDirectory, 'bidly-lockup-on-light-master.png');
+const lockupOnDarkSource = resolve(lolo2SourceDirectory, 'bidly-lockup-on-dark-master.png');
 
 function icoFromPngEntries(entries) {
   const header = Buffer.alloc(6);
   header.writeUInt16LE(0, 0);
   header.writeUInt16LE(1, 2);
   header.writeUInt16LE(entries.length, 4);
-
   const directory = Buffer.alloc(entries.length * 16);
   let offset = header.length + directory.length;
   for (const [index, entry] of entries.entries()) {
     const start = index * 16;
-    directory.writeUInt8(entry.size === 256 ? 0 : entry.size, start);
-    directory.writeUInt8(entry.size === 256 ? 0 : entry.size, start + 1);
+    directory.writeUInt8(entry.size, start);
+    directory.writeUInt8(entry.size, start + 1);
     directory.writeUInt8(0, start + 2);
     directory.writeUInt8(0, start + 3);
     directory.writeUInt16LE(1, start + 4);
@@ -50,130 +40,124 @@ function icoFromPngEntries(entries) {
   return Buffer.concat([header, directory, ...entries.map((entry) => entry.buffer)]);
 }
 
-async function renderPng(page, svg, size, outputPath, scale = 1) {
-  await page.setViewportSize({ width: size, height: size });
-  await page.setContent(`
-    <style>
-      html, body { width: 100%; height: 100%; margin: 0; background: transparent; }
-      body { display: grid; place-items: center; }
-      img { width: ${Math.round(size * scale)}px; height: ${Math.round(size * scale)}px; object-fit: contain; }
-    </style>
-    <img alt="" src="${toDataUrl(svg)}">
-  `);
-  await page.locator('img').screenshot({ omitBackground: true, path: outputPath });
-  return readFile(outputPath);
+async function transparentSquare(source, size, inset = 0.08) {
+  const contentSize = Math.round(size * (1 - inset * 2));
+  const content = await sharp(source)
+    .resize({
+      background: { alpha: 0, b: 0, g: 0, r: 0 },
+      fit: 'contain',
+      height: contentSize,
+      width: contentSize,
+    })
+    .png()
+    .toBuffer();
+  return sharp({
+    create: { background: { alpha: 0, b: 0, g: 0, r: 0 }, channels: 4, height: size, width: size },
+  })
+    .composite([{ input: content, gravity: 'center' }])
+    .png()
+    .toBuffer();
 }
 
-async function renderWebp(page, svg, size) {
-  const dataUrl = await page.evaluate(
-    async ({ source, targetSize }) =>
-      new Promise((resolveDataUrl, reject) => {
-        const image = new Image();
-        const blobUrl = URL.createObjectURL(new Blob([source], { type: 'image/svg+xml' }));
-        image.onload = () => {
-          const canvas = document.createElement('canvas');
-          canvas.width = targetSize;
-          canvas.height = targetSize;
-          const context = canvas.getContext('2d');
-          if (!context) {
-            URL.revokeObjectURL(blobUrl);
-            reject(new Error('Canvas 2D context is unavailable'));
-            return;
-          }
-          const scale = Math.min(targetSize / image.width, targetSize / image.height);
-          const width = image.width * scale;
-          const height = image.height * scale;
-          context.drawImage(
-            image,
-            (targetSize - width) / 2,
-            (targetSize - height) / 2,
-            width,
-            height,
-          );
-          URL.revokeObjectURL(blobUrl);
-          resolveDataUrl(canvas.toDataURL('image/webp', 0.92));
-        };
-        image.onerror = () => {
-          URL.revokeObjectURL(blobUrl);
-          reject(new Error('Could not render the Bidly SVG as WebP'));
-        };
-        image.src = blobUrl;
-      }),
-    { source: svg, targetSize: size },
-  );
-  if (typeof dataUrl !== 'string') throw new Error('Canvas did not return a WebP data URL');
-  return fromDataUrl(dataUrl);
+async function solidSquare(source, size, inset, background) {
+  const contentSize = Math.round(size * (1 - inset * 2));
+  const content = await sharp(source)
+    .resize({
+      background: { alpha: 0, b: 0, g: 0, r: 0 },
+      fit: 'contain',
+      height: contentSize,
+      width: contentSize,
+    })
+    .png()
+    .toBuffer();
+  return sharp({ create: { background, channels: 4, height: size, width: size } })
+    .composite([{ input: content, gravity: 'center' }])
+    .png()
+    .toBuffer();
 }
 
 async function main() {
-  const mark = await readFile(markSource, 'utf8');
   await mkdir(resolve(outputDirectory, 'motion'), { recursive: true });
-  await copyFile(markSource, resolve(outputDirectory, 'bidly-mark.svg'));
-  await copyFile(logoSource, resolve(outputDirectory, 'bidly-logo.svg'));
-  await copyFile(ogSource, resolve(outputDirectory, 'bidly-og.svg'));
+  await mkdir(routeAssetsDirectory, { recursive: true });
+  await Promise.all([
+    copyFile(markSource, resolve(outputDirectory, 'bidly-mark.png')),
+    copyFile(logoOnLightSource, resolve(outputDirectory, 'bidly-logo-on-light.png')),
+    copyFile(logoOnDarkSource, resolve(outputDirectory, 'bidly-logo-on-dark.png')),
+    copyFile(lockupOnLightSource, resolve(outputDirectory, 'bidly-lockup-on-light.png')),
+    copyFile(lockupOnDarkSource, resolve(outputDirectory, 'bidly-lockup-on-dark.png')),
+    sharp(markSource)
+      .webp({ effort: 5, lossless: true })
+      .toFile(resolve(outputDirectory, 'bidly-mark.webp')),
+    sharp(logoOnLightSource)
+      .webp({ effort: 5, lossless: true })
+      .toFile(resolve(outputDirectory, 'bidly-logo-on-light.webp')),
+    sharp(logoOnDarkSource)
+      .webp({ effort: 5, lossless: true })
+      .toFile(resolve(outputDirectory, 'bidly-logo-on-dark.webp')),
+    sharp(lockupOnLightSource)
+      .webp({ effort: 5, lossless: true })
+      .toFile(resolve(outputDirectory, 'bidly-lockup-on-light.webp')),
+    sharp(lockupOnDarkSource)
+      .webp({ effort: 5, lossless: true })
+      .toFile(resolve(outputDirectory, 'bidly-lockup-on-dark.webp')),
+  ]);
 
-  const browser = await chromium.launch({ headless: true });
-  try {
-    const page = await browser.newPage();
-    const pngBuffers = new Map();
-    for (const size of [...new Set([16, ...pngSizes, 180, 192])]) {
-      const filename = `bidly-mark-${size}.png`;
-      pngBuffers.set(size, await renderPng(page, mark, size, resolve(outputDirectory, filename)));
-    }
-    for (const size of webpSizes) {
-      await writeFile(
-        resolve(outputDirectory, `bidly-mark-${size}.webp`),
-        await renderWebp(page, mark, size),
-      );
-    }
-    await renderPng(page, mark, 512, resolve(outputDirectory, 'bidly-mark-maskable-512.png'), 0.7);
-
-    await copyFile(
-      resolve(outputDirectory, 'bidly-mark-16.png'),
-      resolve(appDirectory, 'public', 'favicon-16x16.png'),
-    );
-    await copyFile(
-      resolve(outputDirectory, 'bidly-mark-32.png'),
-      resolve(appDirectory, 'public', 'favicon-32x32.png'),
-    );
-    await copyFile(
-      resolve(outputDirectory, 'bidly-mark-180.png'),
-      resolve(appDirectory, 'public', 'apple-touch-icon.png'),
-    );
-    await copyFile(
-      resolve(outputDirectory, 'bidly-mark-192.png'),
-      resolve(appDirectory, 'public', 'pwa-192x192.png'),
-    );
-    await copyFile(
-      resolve(outputDirectory, 'bidly-mark-512.png'),
-      resolve(appDirectory, 'public', 'pwa-512x512.png'),
-    );
-    await copyFile(
-      resolve(outputDirectory, 'bidly-mark-maskable-512.png'),
-      resolve(appDirectory, 'public', 'pwa-maskable-512x512.png'),
-    );
-
-    const favicon = icoFromPngEntries(
-      [16, 32].map((size) => {
-        const buffer = pngBuffers.get(size);
-        if (!buffer) throw new Error(`Missing generated ${size}px PNG`);
-        return { size, buffer };
-      }),
-    );
-    await writeFile(resolve(appDirectory, 'public', 'favicon.ico'), favicon);
-    await mkdir(resolve(appDirectory, 'src', 'app'), { recursive: true });
-    await writeFile(resolve(appDirectory, 'src', 'app', 'favicon.ico'), favicon);
-    await copyFile(
-      resolve(outputDirectory, 'bidly-mark-512.png'),
-      resolve(appDirectory, 'src', 'app', 'icon.png'),
-    );
-    await copyFile(
-      resolve(outputDirectory, 'bidly-mark-180.png'),
-      resolve(appDirectory, 'src', 'app', 'apple-icon.png'),
-    );
-  } finally {
-    await browser.close();
+  const iconBuffers = new Map();
+  for (const size of [16, 32, 48, 180, 192, 512, 800]) {
+    iconBuffers.set(size, await transparentSquare(markSource, size, size <= 48 ? 0.02 : 0.07));
   }
+  for (const size of [16, 32, 48]) {
+    const buffer = iconBuffers.get(size);
+    await writeFile(resolve(outputDirectory, `favicon-${size}x${size}.png`), buffer);
+    await writeFile(resolve(publicDirectory, `favicon-${size}x${size}.png`), buffer);
+  }
+
+  const favicon = icoFromPngEntries(
+    [16, 32, 48].map((size) => ({ buffer: iconBuffers.get(size), size })),
+  );
+  await Promise.all([
+    writeFile(resolve(outputDirectory, 'favicon.ico'), favicon),
+    writeFile(resolve(publicDirectory, 'favicon.ico'), favicon),
+    writeFile(resolve(routeAssetsDirectory, 'favicon.ico'), favicon),
+    writeFile(resolve(outputDirectory, 'apple-touch-icon-180.png'), iconBuffers.get(180)),
+    writeFile(resolve(publicDirectory, 'apple-touch-icon.png'), iconBuffers.get(180)),
+    writeFile(resolve(routeAssetsDirectory, 'apple-icon.png'), iconBuffers.get(180)),
+    writeFile(resolve(outputDirectory, 'pwa-icon-192.png'), iconBuffers.get(192)),
+    writeFile(resolve(publicDirectory, 'pwa-192x192.png'), iconBuffers.get(192)),
+    writeFile(resolve(outputDirectory, 'pwa-icon-512.png'), iconBuffers.get(512)),
+    writeFile(resolve(publicDirectory, 'pwa-512x512.png'), iconBuffers.get(512)),
+    writeFile(resolve(outputDirectory, 'social-mark-800.png'), iconBuffers.get(800)),
+    writeFile(resolve(routeAssetsDirectory, 'icon.png'), iconBuffers.get(512)),
+  ]);
+
+  const maskable192 = await solidSquare(markSource, 192, 0.19, '#070812');
+  const maskable512 = await solidSquare(markSource, 512, 0.19, '#070812');
+  await Promise.all([
+    writeFile(resolve(outputDirectory, 'pwa-maskable-192.png'), maskable192),
+    writeFile(resolve(outputDirectory, 'pwa-maskable-512.png'), maskable512),
+    writeFile(resolve(publicDirectory, 'pwa-maskable-192x192.png'), maskable192),
+    writeFile(resolve(publicDirectory, 'pwa-maskable-512x512.png'), maskable512),
+  ]);
+
+  const ogLogo = await sharp(lockupOnDarkSource).resize({ width: 820 }).png().toBuffer();
+  const ogBackground = Buffer.from(`
+    <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+      <defs><radialGradient id="a" cx="72%" cy="22%" r="80%"><stop offset="0" stop-color="#151735"/><stop offset="1" stop-color="#000000"/></radialGradient></defs>
+      <rect width="1200" height="630" fill="url(#a)"/>
+      <path d="M0 520 C300 430 560 650 1200 430 L1200 630 L0 630Z" fill="#C6FF00" opacity="0.08"/>
+    </svg>`);
+  await sharp(ogBackground)
+    .composite([{ input: ogLogo, left: 92, top: 180 }])
+    .png()
+    .toFile(resolve(outputDirectory, 'bidly-og-1200x630.png'));
+  await copyFile(
+    resolve(outputDirectory, 'bidly-og-1200x630.png'),
+    resolve(publicDirectory, 'bidly-og.png'),
+  );
+  await writeFile(
+    resolve(outputDirectory, 'motion', 'README.md'),
+    '# Bidly hero assets\n\nThe homepage uses the approved static LOLO2 4K hero. Video, scroll scrubbing and fake 3D are intentionally absent. See `docs/design/BIDLY_HERO_MOTION.md` and `docs/design/LOLO2_ASSET_AUDIT.md`.\n',
+  );
 }
 
 await main();

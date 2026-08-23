@@ -1,0 +1,1102 @@
+[
+  {
+    "consoleErrors": [],
+    "name": "home-desktop",
+    "pageErrors": [],
+    "path": "/",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "home-tablet",
+    "pageErrors": [],
+    "path": "/",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "home-mobile",
+    "pageErrors": [],
+    "path": "/",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "how-it-works-desktop",
+    "pageErrors": [],
+    "path": "/how-it-works",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "market-desktop",
+    "pageErrors": [],
+    "path": "/market",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "market-mobile",
+    "pageErrors": [],
+    "path": "/market",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "business-info-desktop",
+    "pageErrors": [],
+    "path": "/business-info",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "about-desktop",
+    "pageErrors": [],
+    "path": "/about",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-lockup-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "support-desktop",
+    "pageErrors": [],
+    "path": "/support",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "login-desktop",
+    "pageErrors": [],
+    "path": "/login",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-mark.png"
+      },
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "login-mobile",
+    "pageErrors": [],
+    "path": "/login",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-mark.png"
+      },
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "buyer-dashboard-desktop",
+    "pageErrors": [],
+    "path": "/app",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-mark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "buyer-dashboard-mobile",
+    "pageErrors": [],
+    "path": "/app",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-mark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "business-dashboard-desktop",
+    "pageErrors": [],
+    "path": "/business",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "business-dashboard-mobile",
+    "pageErrors": [],
+    "path": "/business",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "account-unavailable",
+    "pageErrors": [],
+    "path": "/account",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "admin-unavailable",
+    "pageErrors": [],
+    "path": "/admin",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "legal-terms",
+    "pageErrors": [],
+    "path": "/legal/terms",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "legal-privacy",
+    "pageErrors": [],
+    "path": "/legal/privacy",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "legal-rules",
+    "pageErrors": [],
+    "path": "/legal/rules",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "market-home-internet",
+    "pageErrors": [],
+    "path": "/market/home_internet",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "market-mobile-connection",
+    "pageErrors": [],
+    "path": "/market/mobile_connection",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "market-fitness",
+    "pageErrors": [],
+    "path": "/market/fitness",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "market-dental-hygiene",
+    "pageErrors": [],
+    "path": "/market/dental_hygiene",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "market-tire-service",
+    "pageErrors": [],
+    "path": "/market/tire_service",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(247, 248, 251)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "buyer-auctions",
+    "pageErrors": [],
+    "path": "/my/auctions",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-mark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "buyer-savings",
+    "pageErrors": [],
+    "path": "/my/savings",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-mark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "buyer-auction-detail",
+    "pageErrors": [],
+    "path": "/auctions/home_internet",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-mark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "buyer-auction-offers",
+    "pageErrors": [],
+    "path": "/auctions/home_internet/offers",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-mark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "buyer-offer-detail",
+    "pageErrors": [],
+    "path": "/offers/svyaz-plus",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-mark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "buyer-booking",
+    "pageErrors": [],
+    "path": "/bookings/hygiene-25-08",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      },
+      {
+        "border": "0px none rgb(166, 172, 188)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-mark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "business-demand",
+    "pageErrors": [],
+    "path": "/business/demand",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "business-auctions",
+    "pageErrors": [],
+    "path": "/business/auctions",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "business-offers",
+    "pageErrors": [],
+    "path": "/business/offers",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "business-bookings",
+    "pageErrors": [],
+    "path": "/business/bookings",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "business-capacity",
+    "pageErrors": [],
+    "path": "/business/capacity",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "business-clients",
+    "pageErrors": [],
+    "path": "/business/clients",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "business-analytics",
+    "pageErrors": [],
+    "path": "/business/analytics",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "business-finance",
+    "pageErrors": [],
+    "path": "/business/finance",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "business-reviews",
+    "pageErrors": [],
+    "path": "/business/reviews",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "business-team",
+    "pageErrors": [],
+    "path": "/business/team",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "business-documents",
+    "pageErrors": [],
+    "path": "/business/documents",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  },
+  {
+    "consoleErrors": [],
+    "name": "business-settings",
+    "pageErrors": [],
+    "path": "/business/settings",
+    "status": 200,
+    "brandImages": [
+      {
+        "border": "0px none rgb(255, 255, 255)",
+        "boxShadow": "none",
+        "filter": "none",
+        "mixBlendMode": "normal",
+        "parentBackground": "rgba(0, 0, 0, 0)",
+        "src": "/brand/bidly-logo-on-dark.png"
+      }
+    ],
+    "horizontalOverflow": false,
+    "imageFailures": [],
+    "unexpectedLightSurfaces": []
+  }
+]

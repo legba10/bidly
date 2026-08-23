@@ -71,21 +71,37 @@
 
 .bidly-brand-logo {
   display: inline-flex;
+  max-width: 100%;
   align-items: center;
-  gap: 0.56rem;
-  color: var(--bidly-color-brand);
-  font-family: var(--bidly-font-display);
-  font-size: 1.16rem;
-  font-weight: 800;
-  letter-spacing: 0.085em;
   line-height: 1;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.bidly-brand-logo__image {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 2rem;
+  object-fit: contain;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
 }
 
 .bidly-brand-mark {
-  width: 1.6rem;
-  height: 1.86rem;
+  display: block;
+  width: 2rem;
+  height: 2rem;
   flex: 0 0 auto;
-  overflow: visible;
+  object-fit: contain;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
 }
 
 .bidly-brand-wordmark {
@@ -93,45 +109,262 @@
   font-variant-ligatures: none;
 }
 
-.bidly-brand-logo[data-compact='true'] .bidly-brand-mark {
-  width: 1.85rem;
-  height: 2.15rem;
+.bidly-brand-logo[data-variant='mark'] .bidly-brand-mark {
+  width: 2.1rem;
+  height: 2.1rem;
 }
 
-.bidly-brand-logo[data-tone='light'] {
-  color: var(--bidly-color-on-brand);
+.bidly-brand-logo[data-variant^='lockup'] .bidly-brand-logo__image {
+  height: auto;
+  max-height: 7rem;
 }
 
-.bidly-animated-brand-hero {
+.bidly-demand-card,
+.bidly-auction-card,
+.bidly-offer-card,
+.bidly-business-metric {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-surface);
+  border: 1px solid var(--bidly-color-border);
+  border-radius: var(--bidly-radius-lg);
+  box-shadow: var(--bidly-shadow-subtle);
+}
+
+.bidly-demand-card,
+.bidly-auction-card,
+.bidly-offer-card {
+  display: grid;
+  gap: var(--bidly-space-4);
+  padding: var(--bidly-space-5);
+}
+
+.bidly-demand-card header,
+.bidly-auction-card header,
+.bidly-offer-card header,
+.bidly-demand-card footer,
+.bidly-auction-card footer,
+.bidly-offer-card footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--bidly-space-3);
+}
+
+.bidly-demand-card h3,
+.bidly-auction-card h3,
+.bidly-offer-card h3,
+.bidly-demand-card p,
+.bidly-auction-card p,
+.bidly-offer-card p {
+  margin: 0;
+}
+
+.bidly-demand-card__icon {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  color: var(--bidly-color-brand);
+  background: var(--bidly-color-brand-subtle);
+  border-radius: var(--bidly-radius-md);
+}
+
+.bidly-demand-card__icon svg {
+  width: 1.35rem;
+}
+
+.bidly-demand-card header > div,
+.bidly-offer-card header > div {
+  flex: 1;
+}
+
+.bidly-demand-card header p,
+.bidly-offer-card header p,
+.bidly-auction-card header p {
+  color: var(--bidly-color-text-secondary);
+  font-size: var(--bidly-text-body-small-size);
+}
+
+.bidly-demand-card__numbers {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--bidly-space-3);
+}
+
+.bidly-demand-card__numbers div {
+  display: grid;
+  gap: var(--bidly-space-1);
+  padding: var(--bidly-space-3);
+  background: var(--bidly-color-background-secondary);
+  border-radius: var(--bidly-radius-sm);
+}
+
+.bidly-demand-card__numbers strong {
+  font-size: var(--bidly-text-title-size);
+  font-variant-numeric: tabular-nums;
+}
+
+.bidly-demand-card__numbers span,
+.bidly-demand-card footer,
+.bidly-auction-card footer,
+.bidly-offer-card footer {
+  color: var(--bidly-color-text-secondary);
+  font-size: var(--bidly-text-caption-size);
+}
+
+.bidly-demand-card__summary {
+  min-height: 2.6rem;
+  color: var(--bidly-color-text-secondary);
+  line-height: 1.55;
+}
+
+.bidly-auction-card header strong {
+  color: var(--bidly-color-brand);
+  font-size: var(--bidly-text-title-size);
+}
+
+.bidly-offer-card header > span {
+  padding: var(--bidly-space-1) var(--bidly-space-2);
+  color: var(--bidly-color-success);
+  background: var(--bidly-color-success-subtle);
+  border-radius: 999px;
+  font-size: var(--bidly-text-caption-size);
+  font-weight: 700;
+}
+
+.bidly-offer-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--bidly-space-2);
+}
+
+.bidly-offer-card__price strong {
+  font-size: var(--bidly-text-numeric-large-size);
+  font-variant-numeric: tabular-nums;
+}
+
+.bidly-offer-card__price em {
+  margin-left: auto;
+  color: var(--bidly-color-success);
+  font-style: normal;
+  font-weight: 750;
+}
+
+.bidly-offer-card__total {
+  padding: var(--bidly-space-3);
+  color: var(--bidly-color-text-secondary);
+  background: var(--bidly-color-background-secondary);
+  border-radius: var(--bidly-radius-sm);
+  font-size: var(--bidly-text-body-small-size);
+}
+
+.bidly-offer-card ul {
+  display: grid;
+  gap: var(--bidly-space-2);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.bidly-offer-card li::before {
+  margin-right: var(--bidly-space-2);
+  color: var(--bidly-color-success);
+  content: '✓';
+}
+
+.bidly-business-metric {
+  display: grid;
+  gap: var(--bidly-space-2);
+  min-height: 8.5rem;
+  padding: var(--bidly-space-4);
+}
+
+.bidly-business-metric p,
+.bidly-business-metric span {
+  margin: 0;
+  color: var(--bidly-color-text-secondary);
+  font-size: var(--bidly-text-caption-size);
+}
+
+.bidly-business-metric strong {
+  font-size: var(--bidly-text-h3-size);
+  font-variant-numeric: tabular-nums;
+}
+
+.bidly-business-metric[data-tone='success'] strong,
+.bidly-business-metric[data-tone='success'] span {
+  color: var(--bidly-color-success);
+}
+
+.bidly-conversion-funnel,
+.bidly-capacity-chart {
+  display: grid;
+  gap: var(--bidly-space-3);
+}
+
+.bidly-conversion-funnel > div {
   position: relative;
   display: grid;
-  width: min(17rem, 66vw);
-  aspect-ratio: 6 / 7;
-  place-items: center;
+  grid-template-columns: minmax(8rem, 0.8fr) minmax(7rem, 1fr) 4rem;
+  align-items: center;
+  gap: var(--bidly-space-3);
+  color: var(--bidly-color-text-secondary);
+  font-size: var(--bidly-text-body-small-size);
 }
 
-.bidly-animated-brand-hero__mark {
-  width: 100%;
+.bidly-conversion-funnel i {
+  display: block;
+  height: 1.55rem;
+  background: linear-gradient(90deg, var(--bidly-color-brand), var(--bidly-color-brand-violet));
+  border-radius: var(--bidly-radius-xs);
+}
+
+.bidly-conversion-funnel strong,
+.bidly-capacity-chart strong {
+  color: var(--bidly-color-text-primary);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.bidly-capacity-chart > div {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(8rem, 1fr) 5rem;
+  align-items: center;
+  gap: var(--bidly-space-3);
+  color: var(--bidly-color-text-secondary);
+  font-size: var(--bidly-text-body-small-size);
+}
+
+.bidly-capacity-chart__track {
+  height: 0.55rem;
+  overflow: hidden;
+  background: var(--bidly-color-background-secondary);
+  border-radius: 999px;
+}
+
+.bidly-capacity-chart__track i {
+  display: block;
   height: 100%;
+  background: var(--bidly-color-success);
+  border-radius: inherit;
 }
 
-.bidly-animated-brand-hero__video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
+@media (max-width: 35rem) {
+  .bidly-demand-card__numbers {
+    grid-template-columns: 1fr 1fr;
+  }
 
-a .bidly-brand-logo {
-  transition:
-    transform 180ms var(--bidly-ease-standard),
-    filter 180ms var(--bidly-ease-standard);
-}
+  .bidly-conversion-funnel > div,
+  .bidly-capacity-chart > div {
+    grid-template-columns: 1fr 4rem;
+  }
 
-a:hover .bidly-brand-logo {
-  filter: saturate(1.08) brightness(1.03);
-  transform: translateY(-1px);
+  .bidly-conversion-funnel i,
+  .bidly-capacity-chart__track {
+    grid-row: 2;
+    grid-column: 1 / -1;
+  }
 }
 
 .bidly-button[data-variant='secondary']:hover:not(:disabled),
@@ -655,10 +888,6 @@ a:hover .bidly-brand-logo {
 
   .bidly-button__spinner {
     animation-duration: 1.6s;
-  }
-
-  .bidly-animated-brand-hero__video {
-    display: none;
   }
 }
 

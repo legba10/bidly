@@ -7,7 +7,7 @@
 Tokens in `packages/ui/src/tokens` are the only source for colour, spacing, radius, elevation, focus, type and motion. Key families:
 
 - canvas/surface/text/border for structure;
-- indigo brand and semantic ready/attention/danger colours for meaning;
+- lime action, electric blue/violet brand accents and semantic ready/attention/danger colours;
 - density, layout and z-index tokens for layout policy;
 - display/body/numeric tokens, with tabular figures for money, time and capacity;
 - fast/standard motion that switches off for `prefers-reduced-motion`.
@@ -17,10 +17,12 @@ Tokens in `packages/ui/src/tokens` are the only source for colour, spacing, radi
 ## Component layers
 
 1. Primitives: button, surface, input/field, badge, focus/skip behaviour.
-2. Brand and icons: vector-first Bidly ribbon mark, wordmark and composition plus one internal outline icon set. Generated platform assets come from the SVG master; see `BIDLY_BRAND_GUIDELINES.md` and `BRAND_ASSETS.md`.
+2. Brand and icons: approved raster gradient Bidly ribbon mark, semantic wordmark/composition and one internal outline icon set. Generated platform assets come from controlled raster masters; see `BIDLY_BRAND_GUIDELINES.md` and `BRAND_ASSETS.md`.
 3. Domain display: Total Cost, status, condition/capacity, date and progress components.
 4. Patterns: buyer offer comparison, market progress, demand pulse, capacity calendar, business metric and audit timeline.
 5. Screens: compose patterns; they do not calculate money, capacity, authorization or auction state.
+
+App-specific compositions such as `BidlyHeroVisual`, buyer shells and business shells stay in `apps/web`. Shared visual/data-display patterns stay in `@bidly/ui` with Storybook coverage.
 
 ## Responsive policy
 

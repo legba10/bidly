@@ -23,6 +23,7 @@ export default defineConfig({
           environment: 'node',
           include: [
             'apps/api/src/**/*.test.ts',
+            'apps/web/src/**/*.test.ts',
             'packages/config/src/**/*.test.ts',
             'packages/domain/src/**/*.test.ts',
             'packages/validation/src/**/*.test.ts',

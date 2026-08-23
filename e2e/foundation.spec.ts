@@ -5,64 +5,221 @@ import { expect, test } from '@playwright/test';
 import type { Page } from '@playwright/test';
 
 async function openLanding(page: Page): Promise<void> {
-  await page.goto('/', { waitUntil: 'domcontentloaded' });
-  await expect(
-    page.getByRole('heading', { level: 1, name: 'Компании конкурируют за ваш выбор' }),
-  ).toBeVisible();
+  await page.goto('/', { waitUntil: 'commit' });
+  await expect(page.getByRole('heading', { level: 1, name: /Ваш спрос/ })).toBeVisible();
 }
 
-test('explains the reverse-demand marketplace and provides a functioning public path', async ({
-  page,
-}) => {
+function isWebKitRscPrefetchNoise(message: string): boolean {
+  return message.includes('?_rsc=') && message.includes('due to access control checks');
+}
+
+test('keeps the production public path truthful and functional', async ({ page }) => {
   await openLanding(page);
 
-  await expect(page.getByText('Вы сами выбираете подходящее предложение.')).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Узнать о работе с Bidly' })).toHaveAttribute(
+  await expect(page.getByText('DEV ONLY', { exact: false })).toHaveCount(0);
+  await expect(page.getByText('18 421', { exact: false })).toHaveCount(0);
+  await expect(page.getByText('549 ₽', { exact: false })).toHaveCount(0);
+  const hero = page.locator('.bidly-home-hero');
+  await expect(hero.getByRole('link', { name: 'Создать запрос' })).toHaveAttribute(
     'href',
-    '/business-info',
+    '/market',
+  );
+  await expect(page.getByRole('link', { name: 'Как это работает' }).last()).toHaveAttribute(
+    'href',
+    '/how-it-works',
   );
 
-  const secondStep = page.getByRole('button', { name: 'Bidly объединяет совместимый спрос' });
-  await secondStep.click();
-  await expect(secondStep).toHaveAttribute('aria-current', 'step');
-  await expect(
-    page.getByText('Похожие запросы объединяются без потери ваших индивидуальных ограничений.'),
-  ).toBeVisible();
-});
-
-test('has no serious or critical automated accessibility violations', async ({ page }) => {
-  await openLanding(page);
-  const results = await new AxeBuilder({ page }).analyze();
-
-  expect(getBlockingAccessibilityViolations(results.violations)).toEqual([]);
-});
-
-test('keeps live market data explicit while exposing the approved category catalog', async ({
-  page,
-}) => {
-  await page.goto('/market', { waitUntil: 'domcontentloaded' });
-
+  await hero.getByRole('link', { name: 'Создать запрос' }).click();
   await expect(
     page.getByRole('heading', {
       level: 1,
-      name: 'Выберите направление, с которого начнётся ваш запрос',
+      name: 'Спрос уже есть. Выберите, где усилить его своим запросом',
     }),
   ).toBeVisible();
-  await expect(page.getByText('Направлений найдено: 3')).toBeVisible();
-  await expect(
-    page.getByText('Рынок появится после подключения проверенных данных').first(),
-  ).toBeVisible();
-  await expect(page.getByText('549 ₽')).toHaveCount(0);
 });
 
-test('opens the usable mobile navigation', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
+test('uses one static responsive hero without video or scroll scrubbing', async ({ page }) => {
   await openLanding(page);
 
+  const visual = page.locator('.bidly-hero-visual');
+  const image = visual.locator('img');
+  await expect(visual).toBeVisible();
+  await expect(page.locator('video')).toHaveCount(0);
+  await expect(page.locator('[data-hero-scroll-region]')).toHaveCount(0);
+  await expect(image).toHaveAttribute('src', '/media/bidly-hero-static-4k.png');
+  await expect
+    .poll(() => image.evaluate((element) => (element as HTMLImageElement).naturalWidth))
+    .toBeGreaterThan(0);
+  await expect(page.locator('.bidly-home-hero')).toHaveCSS('position', 'relative');
+});
+
+test('uses transparent approved logo assets in primary contexts', async ({ page }) => {
+  const routes = ['/', '/market', '/about', '/login', '/app', '/business'];
+
+  for (const route of routes) {
+    await page.goto(route, { waitUntil: 'domcontentloaded' });
+    const logo = page.locator('.bidly-brand-logo').first();
+    const image = logo.locator('img');
+    await expect(logo).toBeVisible();
+    await expect(image).toHaveAttribute(
+      'src',
+      /\/brand\/bidly-(?:logo-on-dark|mark|lockup-on-dark)\.png/,
+    );
+    const presentation = await logo.evaluate((element) => {
+      const style = getComputedStyle(element);
+      const imageElement = element.querySelector('img');
+      if (!(imageElement instanceof HTMLImageElement)) throw new Error('Brand image is missing');
+      const imageStyle = getComputedStyle(imageElement);
+      return {
+        background: style.backgroundImage,
+        backgroundColor: style.backgroundColor,
+        border: style.borderStyle,
+        boxShadow: style.boxShadow,
+        filter: imageStyle.filter,
+        mixBlendMode: imageStyle.mixBlendMode,
+      };
+    });
+    expect(presentation).toEqual({
+      background: 'none',
+      backgroundColor: 'rgba(0, 0, 0, 0)',
+      border: 'none',
+      boxShadow: 'none',
+      filter: 'none',
+      mixBlendMode: 'normal',
+    });
+  }
+});
+
+test('keeps the public header intentional before and after scroll', async ({ page }) => {
+  await openLanding(page);
+  const header = page.locator('.bidly-public-header');
+  const logoSource = await header.locator('img').getAttribute('src');
+  await expect(header).toHaveAttribute('data-scrolled', 'false');
+
+  await page.evaluate(() => {
+    window.scrollTo(0, Math.max(180, window.innerHeight));
+  });
+  await expect(header).toHaveAttribute('data-scrolled', 'true');
+  await expect(header.locator('img')).toHaveAttribute('src', logoSource ?? '');
+  const background = await header.evaluate((element) => getComputedStyle(element).backgroundColor);
+  expect(background).not.toBe('rgb(128, 128, 128)');
+});
+
+test('does not add a custom cursor or decorative pointer transform', async ({ page }) => {
+  await openLanding(page);
+  await expect(page.locator('[style*="cursor:"][style*="fixed"]')).toHaveCount(0);
+});
+
+test('has no serious or critical automated accessibility violations', async ({ page }) => {
+  test.setTimeout(120_000);
+  await openLanding(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(getBlockingAccessibilityViolations(results.violations)).toEqual([]);
+});
+
+test('keeps production market, login, buyer and business data boundaries explicit', async ({
+  page,
+  request,
+}) => {
+  test.setTimeout(120_000);
+  await page.goto('/market', { waitUntil: 'domcontentloaded' });
+  await expect(
+    page.getByText('Живые данные появятся только из проверенного API').first(),
+  ).toBeVisible();
+  await expect(page.getByText('549 ₽', { exact: false })).toHaveCount(0);
+
+  await page.goto('/login', { waitUntil: 'domcontentloaded' });
+  await expect(page.getByRole('heading', { name: 'Подключаем защищённый вход' })).toBeVisible();
+  await expect(page.getByText('DEV', { exact: false })).toHaveCount(0);
+  await expect(page.getByText('549 ₽', { exact: false })).toHaveCount(0);
+
+  await page.goto('/app', { waitUntil: 'domcontentloaded' });
+  await expect(page.getByText('Личный кабинет ждёт защищённый вход')).toBeVisible();
+
+  await page.goto('/business', { waitUntil: 'domcontentloaded' });
+  await expect(page.getByText('Бизнес-раздел ждёт организационный контур')).toBeVisible();
+
+  expect(
+    (await request.post('/api/dev-auth/request', { data: { phone: '+7 999 000-00-00' } })).status(),
+  ).toBe(404);
+  expect((await request.post('/api/dev-auth/logout')).status()).toBe(404);
+});
+
+test('keeps all required responsive layouts within the viewport', async ({ page }) => {
+  test.setTimeout(180_000);
+  const viewports = [
+    { width: 1920, height: 1080 },
+    { width: 1440, height: 900 },
+    { width: 1366, height: 768 },
+    { width: 1280, height: 800 },
+    { width: 1024, height: 768 },
+    { width: 768, height: 1024 },
+    { width: 430, height: 932 },
+    { width: 390, height: 844 },
+    { width: 375, height: 812 },
+  ];
+
+  for (const viewport of viewports) {
+    await page.setViewportSize(viewport);
+    await openLanding(page);
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1),
+    ).toBe(true);
+    await expect(page.locator('.bidly-hero-visual')).toBeVisible();
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openLanding(page);
   await page.locator('.bidly-public-header__menu > summary').click();
   const navigation = page.getByRole('navigation', { name: 'Мобильная навигация' });
   await expect(navigation).toBeVisible();
   await expect(navigation.getByRole('link', { name: 'Рынок' })).toHaveAttribute('href', '/market');
+});
+
+test('loads every main route without runtime errors or horizontal overflow', async ({ page }) => {
+  test.setTimeout(180_000);
+  const errors: string[] = [];
+  page.on('console', (message) => {
+    if (message.type() === 'error' && !isWebKitRscPrefetchNoise(message.text()))
+      errors.push(message.text());
+  });
+  page.on('pageerror', (error) => {
+    if (!isWebKitRscPrefetchNoise(error.message)) errors.push(error.message);
+  });
+
+  const routes = [
+    '/',
+    '/how-it-works',
+    '/market',
+    '/market/home_internet',
+    '/business-info',
+    '/about',
+    '/support',
+    '/legal/terms',
+    '/legal/privacy',
+    '/legal/rules',
+    '/login',
+    '/app',
+    '/business',
+    '/account',
+    '/admin',
+    '/my/auctions',
+    '/my/savings',
+    '/auctions/example',
+    '/auctions/example/offers',
+    '/offers/example',
+    '/bookings/example',
+  ];
+
+  for (const route of routes) {
+    const response = await page.goto(route, { waitUntil: 'domcontentloaded' });
+    expect(response?.status(), route).toBeLessThan(500);
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1),
+      route,
+    ).toBe(true);
+  }
+  expect(errors).toEqual([]);
 });
 
 test('serves browser security headers', async ({ request }) => {

@@ -1,13 +1,14 @@
 import { Catalog } from '@bidly/domain';
-import { BidlyIcon } from '@bidly/ui';
+import { BidlyIcon, DemandCard } from '@bidly/ui';
 import Link from 'next/link';
 
+import { findDemoCategories, isBidlyDemoMode } from '../demo/marketplace-demo';
 import { ruRU } from '../i18n/messages/ru-RU';
 
 export function categoryRequirements(
   category: Catalog.CategoryFixtureDefinition,
 ): readonly string[] {
-  const requirements = [
+  return [
     category.requiresCoverage
       ? 'Проверим возможность оказать услугу по вашему адресу.'
       : 'Уточним город и важные условия выбора.',
@@ -18,51 +19,104 @@ export function categoryRequirements(
       ? 'Подходящие варианты могут предложить несколько компаний.'
       : 'Подходящий вариант зависит от индивидуальных условий и доступности.',
   ];
-  return requirements;
 }
 
-function categoryIcon(category: Catalog.CategoryFixtureDefinition) {
-  if (category.marketType === 'CAPACITY') return 'calendar';
-  if (category.marketType === 'SWITCH') return 'location';
-  return 'building';
-}
+export function MarketCatalog({
+  city,
+  query,
+  stage,
+}: {
+  readonly city: string;
+  readonly query: string;
+  readonly stage: string;
+}) {
+  const demoMode = isBidlyDemoMode();
+  const demoResults = demoMode
+    ? findDemoCategories(query, stage).filter((item) => city === 'ALL' || item.city === city)
+    : [];
+  const normalized = query.trim().toLocaleLowerCase('ru-RU');
+  const catalogResults = Catalog.developmentCategoryFixtures.filter(
+    (category) => !normalized || category.name.toLocaleLowerCase('ru-RU').includes(normalized),
+  );
 
-export function MarketCatalog({ query }: { readonly query: string }) {
-  const normalizedQuery = query.trim().toLocaleLowerCase('ru-RU');
-  const categories = Catalog.developmentCategoryFixtures.filter((category) => {
-    if (!normalizedQuery) return true;
-    return category.name.toLocaleLowerCase('ru-RU').includes(normalizedQuery);
-  });
+  if (!demoMode) {
+    return (
+      <div className="bidly-market-catalog">
+        <p className="bidly-market-catalog__count">Направлений найдено: {catalogResults.length}</p>
+        <div className="bidly-market-catalog__grid">
+          {catalogResults.map((category) => {
+            const copy = ruRU.landing.categories.bySlug[category.slug];
+            return (
+              <article className="bidly-market-card" key={category.slug}>
+                <span aria-hidden="true" className="bidly-market-card__icon">
+                  <BidlyIcon
+                    name={
+                      category.requiresAppointmentSlot
+                        ? 'calendar'
+                        : category.requiresCoverage
+                          ? 'location'
+                          : 'building'
+                    }
+                  />
+                </span>
+                <div>
+                  <p>{copy.tag}</p>
+                  <h2>{category.name}</h2>
+                  <span>Живые данные появятся только из проверенного API</span>
+                </div>
+                <Link href={`/market/${category.slug}`}>
+                  Условия направления <BidlyIcon name="arrow-right" />
+                </Link>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="bidly-market-catalog">
-      <p aria-live="polite" className="bidly-market-catalog__count">
-        {ruRU.market.resultCount}: {categories.length}
+    <div className="p5-market-results">
+      <p aria-live="polite">
+        Найдено рынков: <strong>{demoResults.length}</strong>
       </p>
-      {categories.length === 0 ? (
-        <p className="bidly-market-catalog__empty">{ruRU.market.noResults}</p>
+      {demoResults.length === 0 ? (
+        <div className="p5-market-empty">
+          <BidlyIcon name="location" />
+          <h2>Такого активного спроса пока нет</h2>
+          <p>
+            Попробуйте другой город, этап или более короткий запрос. Например: «интернет»,
+            «спортзал» или «колёса».
+          </p>
+          <Link href="/market">Сбросить фильтры</Link>
+        </div>
       ) : null}
-      <div className="bidly-market-catalog__grid">
-        {categories.map((category) => {
-          const copy = ruRU.landing.categories.bySlug[category.slug];
-          return (
-            <article className="bidly-market-card" key={category.slug}>
-              <span aria-hidden="true" className="bidly-market-card__icon">
-                <BidlyIcon name={categoryIcon(category)} />
-              </span>
-              <div>
-                <p>{copy.tag}</p>
-                <h2>{category.name}</h2>
-                <span>{ruRU.market.status}</span>
-              </div>
-              <Link href={`/market/${category.slug}`}>
-                {ruRU.market.action}
-                <BidlyIcon name="arrow-right" />
-              </Link>
-            </article>
-          );
-        })}
-      </div>
+      {demoResults.length > 0 ? (
+        <div className="p5-demand-grid">
+          {demoResults.map((category) => (
+            <DemandCard
+              action={
+                <Link className="p5-card-action" href={`/market/${category.slug}`}>
+                  {category.nextAction}
+                  <BidlyIcon name="arrow-right" />
+                </Link>
+              }
+              availability={category.availability}
+              city={category.city}
+              comparableOffer={category.comparableOffer}
+              deadline={category.deadline}
+              icon={category.icon}
+              key={category.slug}
+              participants={category.participants.toLocaleString('ru-RU')}
+              saving={category.saving}
+              stage={category.stageLabel}
+              summary={category.summary}
+              title={category.name}
+              verified={category.verified.toLocaleString('ru-RU')}
+            />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }

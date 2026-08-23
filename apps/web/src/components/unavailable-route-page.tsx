@@ -19,7 +19,7 @@ export function UnavailableRoutePage({ area, businessFrame = false }: Unavailabl
     return (
       <div className="bidly-business-unavailable">
         <aside className="bidly-business-unavailable__rail">
-          <BrandLogo />
+          <BrandLogo variant="on-dark" />
           <p>Бизнес</p>
           <nav aria-label="Разделы бизнеса">
             <span>Обзор</span>

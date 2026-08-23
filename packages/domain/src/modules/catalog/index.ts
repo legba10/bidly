@@ -81,8 +81,40 @@ export const fitnessOfferSchema = z.object({
   availableMemberships: z.number().int().positive().max(100_000),
 });
 
+export const mobileConnectionBuyerSchema = z.object({
+  cityId: z.uuid(),
+  dataGb: z.number().int().positive().max(10_000),
+  minutes: z.number().int().nonnegative().max(100_000),
+  keepNumber: z.boolean(),
+});
+
+export const mobileConnectionOfferSchema = z.object({
+  monthlyMinor: z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER),
+  activationMinor: z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER),
+  dataGb: z.number().int().positive().max(10_000),
+  minutes: z.number().int().nonnegative().max(100_000),
+  contractMonths: z.number().int().nonnegative().max(120),
+  coverageAreaId: z.uuid(),
+});
+
+export const tireServiceBuyerSchema = z.object({
+  cityId: z.uuid(),
+  wheelDiameterInches: z.number().int().min(10).max(30),
+  vehicleType: z.enum(['PASSENGER', 'SUV', 'VAN']),
+  dateFrom: z.iso.datetime({ offset: true }),
+  dateTo: z.iso.datetime({ offset: true }),
+});
+
+export const tireServiceOfferSchema = z.object({
+  totalMinor: z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER),
+  includedServices: z.array(z.string().min(1).max(100)).min(1).max(20),
+  branchId: z.uuid(),
+  slotIds: z.array(z.uuid()).min(1).max(500),
+});
+
 export interface CategoryFixtureDefinition {
-  readonly slug: 'home_internet' | 'dental_hygiene' | 'fitness';
+  readonly slug:
+    'home_internet' | 'mobile_connection' | 'fitness' | 'dental_hygiene' | 'tire_service';
   readonly name: string;
   readonly marketType: CategoryMarketType;
   readonly capacityMeasure: CapacityMeasure;
@@ -110,6 +142,19 @@ export const developmentCategoryFixtures: readonly CategoryFixtureDefinition[] =
     comparisonFields: ['totalCost', 'speedMbps', 'postPromoMonthlyMinor', 'contractMonths'],
   },
   {
+    slug: 'mobile_connection',
+    name: 'Мобильная связь',
+    marketType: 'SWITCH',
+    capacityMeasure: 'CONNECTION',
+    multiWinner: false,
+    requiresCoverage: true,
+    requiresAppointmentSlot: false,
+    requiresSku: false,
+    buyerSchema: mobileConnectionBuyerSchema,
+    offerSchema: mobileConnectionOfferSchema,
+    comparisonFields: ['totalCost', 'dataGb', 'minutes', 'contractMonths'],
+  },
+  {
     slug: 'dental_hygiene',
     name: 'Профессиональная гигиена зубов',
     marketType: 'CAPACITY',
@@ -134,6 +179,19 @@ export const developmentCategoryFixtures: readonly CategoryFixtureDefinition[] =
     buyerSchema: fitnessBuyerSchema,
     offerSchema: fitnessOfferSchema,
     comparisonFields: ['finalPriceMinor', 'activationFeeMinor', 'membershipMonths', 'freezeDays'],
+  },
+  {
+    slug: 'tire_service',
+    name: 'Шиномонтаж',
+    marketType: 'CAPACITY',
+    capacityMeasure: 'APPOINTMENT_SLOT',
+    multiWinner: true,
+    requiresCoverage: false,
+    requiresAppointmentSlot: true,
+    requiresSku: false,
+    buyerSchema: tireServiceBuyerSchema,
+    offerSchema: tireServiceOfferSchema,
+    comparisonFields: ['totalMinor', 'includedServices', 'branchId', 'slotIds'],
   },
 ] as const;
 

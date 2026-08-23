@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react-vite';
 
 import '../src/styles.css';
+import './preview.css';
 
 const preview: Preview = {
   tags: ['autodocs', 'test'],
@@ -16,6 +17,10 @@ const preview: Preview = {
     },
     controls: {
       expanded: true,
+    },
+    backgrounds: {
+      default: 'bidly-dark',
+      values: [{ name: 'bidly-dark', value: '#070812' }],
     },
   },
 };
