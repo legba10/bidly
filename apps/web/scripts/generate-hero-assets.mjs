@@ -9,7 +9,7 @@ const appDirectory = resolve(scriptDirectory, '..');
 const sourceDirectory = resolve(appDirectory, 'brand-source', 'lolo2');
 const outputDirectory = resolve(appDirectory, 'public', 'media');
 
-const heroSource = resolve(sourceDirectory, 'bidly-hero-static-4k-master.png');
+const heroSource = resolve(sourceDirectory, 'bidly-hero-road-4k-master.webp');
 
 async function renderPoster(source, name, width) {
   await sharp(source)
@@ -23,10 +23,10 @@ async function main() {
   await mkdir(outputDirectory, { recursive: true });
 
   await Promise.all([
-    copyFile(heroSource, resolve(outputDirectory, 'bidly-hero-static-4k.png')),
-    renderPoster(heroSource, 'bidly-hero-static-2560.webp', 2560),
-    renderPoster(heroSource, 'bidly-hero-static-1536.webp', 1536),
-    renderPoster(heroSource, 'bidly-hero-static-1024.webp', 1024),
+    copyFile(heroSource, resolve(outputDirectory, 'bidly-hero-road-4k.webp')),
+    renderPoster(heroSource, 'bidly-hero-road-2560.webp', 2560),
+    renderPoster(heroSource, 'bidly-hero-road-1536.webp', 1536),
+    renderPoster(heroSource, 'bidly-hero-road-1024.webp', 1024),
   ]);
 }
 

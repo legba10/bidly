@@ -6,8 +6,8 @@
 
 ## Production assets
 
-- мастер: `apps/web/brand-source/lolo2/bidly-hero-static-4k-master.png`, 3840×2160;
-- точная публичная копия: `apps/web/public/media/bidly-hero-static-4k.png`;
+- мастер: `apps/web/brand-source/lolo2/bidly-hero-road-4k-master.webp`, 3840×2160;
+- точная публичная копия: `apps/web/public/media/bidly-hero-road-4k.webp`;
 - responsive WebP: 2560, 1536 и 1024 px, quality 94;
 - генератор: `apps/web/scripts/generate-hero-assets.mjs`.
 

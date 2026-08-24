@@ -1,7 +1,10 @@
-import { BidlyIcon, BrandLogoOnDark } from '@bidly/ui';
+import { BidlyIcon } from '@bidly/ui';
 import Link from 'next/link';
 
 import type { ReactNode } from 'react';
+
+import { ThemeAwareBrandLogo } from './theme-aware-brand-logo';
+import { ThemeToggle } from './theme-toggle';
 
 export const businessNavigation = [
   ['business', 'location', 'Главная'],
@@ -30,7 +33,7 @@ export function BusinessShell({
     <div className="p5-business-shell">
       <aside className="p5-business-sidebar">
         <Link href="/">
-          <BrandLogoOnDark />
+          <ThemeAwareBrandLogo />
         </Link>
         <span className="p5-business-label">Бизнес</span>
         <div className="p5-business-company">
@@ -71,6 +74,7 @@ export function BusinessShell({
             />
           </form>
           <div>
+            <ThemeToggle />
             <Link aria-label="Поддержка" href="/support">
               <BidlyIcon name="shield" />
             </Link>

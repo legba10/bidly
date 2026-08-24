@@ -1,8 +1,10 @@
-import { BidlyIcon, BrandLogo, BrandMark, IntegrationUnavailable } from '@bidly/ui';
+import { BidlyIcon, BrandMark, IntegrationUnavailable } from '@bidly/ui';
 import Link from 'next/link';
 import { Suspense } from 'react';
 
 import { DevLoginForm } from '../../components/dev-login-form';
+import { ThemeAwareBrandLogo } from '../../components/theme-aware-brand-logo';
+import { ThemeToggle } from '../../components/theme-toggle';
 import { devAuthAvailable } from '../../demo/dev-auth';
 import { ruRU } from '../../i18n/messages/ru-RU';
 
@@ -13,7 +15,7 @@ export default function LoginPage() {
     <main className="p5-auth-page">
       <section className="p5-auth-story">
         <Link className="p5-auth-brand" href="/">
-          <BrandLogo variant="on-dark" />
+          <ThemeAwareBrandLogo surface="dark" />
         </Link>
         <div>
           <p className="bidly-eyebrow">{auth.context}</p>
@@ -62,8 +64,11 @@ export default function LoginPage() {
         </div>
       </section>
       <section className="p5-auth-panel">
+        <div className="p5-auth-panel__controls">
+          <ThemeToggle />
+        </div>
         <Link aria-label="Bidly — на главную" className="p5-auth-panel-brand" href="/">
-          <BrandLogo variant="on-dark" />
+          <ThemeAwareBrandLogo />
         </Link>
         <Link className="bidly-text-link" href="/">
           ← Вернуться на сайт

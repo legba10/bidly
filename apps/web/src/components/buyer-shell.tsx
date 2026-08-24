@@ -3,6 +3,9 @@ import Link from 'next/link';
 
 import type { ReactNode } from 'react';
 
+import { ThemeAwareBrandLogo } from './theme-aware-brand-logo';
+import { ThemeToggle } from './theme-toggle';
+
 const navigation = [
   { href: '/app', icon: 'location', label: 'Главная' },
   { href: '/market', icon: 'users', label: 'Рынок' },
@@ -17,7 +20,7 @@ export function BuyerShell({ children }: { readonly children: ReactNode }) {
     <div className="p5-buyer-shell">
       <aside className="p5-buyer-sidebar">
         <Link href="/">
-          <BrandLogo className="p5-buyer-logo-full" variant="on-dark" />
+          <ThemeAwareBrandLogo className="p5-buyer-logo-full" />
           <BrandLogo className="p5-buyer-logo-mark" variant="mark" />
         </Link>
         <nav aria-label="Кабинет покупателя">
@@ -51,6 +54,7 @@ export function BuyerShell({ children }: { readonly children: ReactNode }) {
             />
           </form>
           <div>
+            <ThemeToggle />
             <Link href="/support" aria-label="Поддержка">
               <BidlyIcon name="shield" />
             </Link>

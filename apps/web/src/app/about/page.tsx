@@ -1,7 +1,8 @@
-import { BidlyIcon, BrandLogo } from '@bidly/ui';
+import { BidlyIcon } from '@bidly/ui';
 import Link from 'next/link';
 
 import { PublicFooter, PublicHeader } from '../../components/public-navigation';
+import { ThemeAwareBrandLogo } from '../../components/theme-aware-brand-logo';
 
 export default function AboutPage() {
   return (
@@ -18,7 +19,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div>
-            <BrandLogo variant="lockup-on-dark" />
+            <ThemeAwareBrandLogo kind="lockup" />
           </div>
         </section>
         <section className="p5-about-story">

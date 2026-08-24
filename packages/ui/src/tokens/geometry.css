@@ -17,12 +17,12 @@
   --bidly-radius-xl: 1.75rem;
   --bidly-radius-pill: 999px;
 
-  --bidly-shadow-subtle: 0 0.4rem 1.4rem rgb(0 0 0 / 16%);
-  --bidly-shadow-raised: 0 0.9rem 2.8rem rgb(0 0 0 / 24%);
-  --bidly-shadow-floating: 0 1.4rem 4rem rgb(0 0 0 / 32%);
-  --bidly-outline-focus: 0 0 0 0.1875rem rgb(198 255 0 / 28%);
-  --bidly-glow-lime: 0 0.8rem 2.4rem rgb(198 255 0 / 12%);
-  --bidly-glow-violet: 0 1rem 3rem rgb(123 97 255 / 16%);
+  --bidly-shadow-subtle: 0 0.4rem 1.4rem rgb(23 26 32 / 8%);
+  --bidly-shadow-raised: 0 0.9rem 2.8rem rgb(23 26 32 / 12%);
+  --bidly-shadow-floating: 0 1.4rem 4rem rgb(23 26 32 / 16%);
+  --bidly-outline-focus: 0 0 0 0.1875rem rgb(154 189 0 / 28%);
+  --bidly-glow-lime: 0 0.7rem 1.8rem rgb(154 189 0 / 9%);
+  --bidly-glow-violet: 0 1rem 2.6rem rgb(104 80 215 / 10%);
 
   --bidly-layout-content-max: 80rem;
   --bidly-layout-reading-max: 43rem;
@@ -39,4 +39,13 @@
   --bidly-motion-fast: 120ms;
   --bidly-motion-standard: 180ms;
   --bidly-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+html[data-theme='dark'] {
+  --bidly-shadow-subtle: 0 0.4rem 1.4rem rgb(0 0 0 / 16%);
+  --bidly-shadow-raised: 0 0.9rem 2.8rem rgb(0 0 0 / 24%);
+  --bidly-shadow-floating: 0 1.4rem 4rem rgb(0 0 0 / 32%);
+  --bidly-outline-focus: 0 0 0 0.1875rem rgb(184 232 0 / 28%);
+  --bidly-glow-lime: 0 0.7rem 1.8rem rgb(184 232 0 / 9%);
+  --bidly-glow-violet: 0 1rem 2.6rem rgb(162 141 255 / 12%);
 }

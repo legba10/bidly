@@ -10,7 +10,7 @@ async function openLanding(page: Page): Promise<void> {
 }
 
 function isWebKitRscPrefetchNoise(message: string): boolean {
-  return message.includes('?_rsc=') && message.includes('due to access control checks');
+  return message.includes('_rsc=') && message.includes('due to access control checks');
 }
 
 test('keeps the production public path truthful and functional', async ({ page }) => {
@@ -46,7 +46,7 @@ test('uses one static responsive hero without video or scroll scrubbing', async 
   await expect(visual).toBeVisible();
   await expect(page.locator('video')).toHaveCount(0);
   await expect(page.locator('[data-hero-scroll-region]')).toHaveCount(0);
-  await expect(image).toHaveAttribute('src', '/media/bidly-hero-static-4k.png');
+  await expect(image).toHaveAttribute('src', '/media/bidly-hero-road-4k.webp');
   await expect
     .poll(() => image.evaluate((element) => (element as HTMLImageElement).naturalWidth))
     .toBeGreaterThan(0);
@@ -58,12 +58,12 @@ test('uses transparent approved logo assets in primary contexts', async ({ page 
 
   for (const route of routes) {
     await page.goto(route, { waitUntil: 'domcontentloaded' });
-    const logo = page.locator('.bidly-brand-logo').first();
+    const logo = page.locator('.bidly-brand-logo:visible').first();
     const image = logo.locator('img');
     await expect(logo).toBeVisible();
     await expect(image).toHaveAttribute(
       'src',
-      /\/brand\/bidly-(?:logo-on-dark|mark|lockup-on-dark)\.png/,
+      /\/brand\/bidly-(?:logo-on-dark|logo-on-light|mark|lockup-on-dark|lockup-on-light)\.png/,
     );
     const presentation = await logo.evaluate((element) => {
       const style = getComputedStyle(element);
@@ -93,16 +93,30 @@ test('uses transparent approved logo assets in primary contexts', async ({ page 
 test('keeps the public header intentional before and after scroll', async ({ page }) => {
   await openLanding(page);
   const header = page.locator('.bidly-public-header');
-  const logoSource = await header.locator('img').getAttribute('src');
+  const logo = header.locator('.bidly-brand-logo:visible img');
+  const logoSource = await logo.getAttribute('src');
   await expect(header).toHaveAttribute('data-scrolled', 'false');
 
   await page.evaluate(() => {
     window.scrollTo(0, Math.max(180, window.innerHeight));
   });
   await expect(header).toHaveAttribute('data-scrolled', 'true');
-  await expect(header.locator('img')).toHaveAttribute('src', logoSource ?? '');
+  await expect(logo).toHaveAttribute('src', logoSource ?? '');
   const background = await header.evaluate((element) => getComputedStyle(element).backgroundColor);
   expect(background).not.toBe('rgb(128, 128, 128)');
+});
+
+test('persists the chosen theme and uses the matching visible logo', async ({ page }) => {
+  await openLanding(page);
+  const toggle = page.getByRole('button', { name: 'Переключить светлую и тёмную тему' });
+  await toggle.click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await expect(page.locator('.bidly-public-header .bidly-brand-logo:visible img')).toHaveAttribute(
+    'src',
+    '/brand/bidly-logo-on-dark.png',
+  );
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 });
 
 test('does not add a custom cursor or decorative pointer transform', async ({ page }) => {

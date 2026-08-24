@@ -1,9 +1,11 @@
-import { BrandLogo, IntegrationUnavailable } from '@bidly/ui';
+import { IntegrationUnavailable } from '@bidly/ui';
 import Link from 'next/link';
 
 import { ruRU } from '../i18n/messages/ru-RU';
 
 import { PublicHeader } from './public-navigation';
+import { ThemeAwareBrandLogo } from './theme-aware-brand-logo';
+import { ThemeToggle } from './theme-toggle';
 
 type UnavailableArea = keyof typeof ruRU.unavailable;
 
@@ -19,7 +21,10 @@ export function UnavailableRoutePage({ area, businessFrame = false }: Unavailabl
     return (
       <div className="bidly-business-unavailable">
         <aside className="bidly-business-unavailable__rail">
-          <BrandLogo variant="on-dark" />
+          <div className="bidly-business-unavailable__brand-row">
+            <ThemeAwareBrandLogo />
+            <ThemeToggle />
+          </div>
           <p>Бизнес</p>
           <nav aria-label="Разделы бизнеса">
             <span>Обзор</span>

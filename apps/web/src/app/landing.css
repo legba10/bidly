@@ -1098,7 +1098,14 @@
   background: var(--bidly-color-business-rail);
 }
 
-.bidly-business-unavailable__rail .bidly-brand-logo {
+.bidly-business-unavailable__brand-row {
+  display: flex;
+  gap: var(--bidly-space-2);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bidly-business-unavailable__brand-row .bidly-brand-logo {
   color: var(--bidly-color-on-brand);
 }
 

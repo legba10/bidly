@@ -1,4 +1,8 @@
 :root {
+  color-scheme: light;
+}
+
+html[data-theme='dark'] {
   color-scheme: dark;
 }
 
@@ -99,14 +103,14 @@ textarea::placeholder {
 .bidly-public-header[data-tone] {
   min-height: 4.75rem;
   color: var(--bidly-color-text-primary);
-  background: rgb(7 8 18 / 78%);
+  background: var(--bidly-color-header-background);
   border-bottom: 1px solid var(--bidly-color-border);
   box-shadow: none;
   backdrop-filter: blur(1rem) saturate(125%);
 }
 
 .bidly-public-header[data-tone][data-scrolled='true'] {
-  background: rgb(7 8 18 / 94%);
+  background: var(--bidly-color-header-scrolled);
   border-bottom-color: var(--bidly-color-border-strong);
   box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 18%);
   backdrop-filter: blur(1.2rem) saturate(130%);
@@ -124,6 +128,82 @@ textarea::placeholder {
   background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
+}
+
+.bidly-theme-brand {
+  display: inline-flex;
+  max-width: 100%;
+}
+
+.bidly-theme-brand__dark {
+  display: none;
+}
+
+html[data-theme='dark'] .bidly-theme-brand__light {
+  display: none;
+}
+
+html[data-theme='dark'] .bidly-theme-brand__dark {
+  display: inline-flex;
+}
+
+.bidly-theme-toggle {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.62rem;
+  color: var(--bidly-color-text-secondary);
+  background: var(--bidly-color-surface-subtle);
+  border: 1px solid var(--bidly-color-border);
+  border-radius: var(--bidly-radius-pill);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  transition:
+    background-color var(--bidly-motion-fast) var(--bidly-ease-standard),
+    border-color var(--bidly-motion-fast) var(--bidly-ease-standard),
+    color var(--bidly-motion-fast) var(--bidly-ease-standard);
+}
+
+.bidly-theme-toggle__mode {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.bidly-theme-toggle__mode--dark {
+  display: none;
+}
+
+html[data-theme='dark'] .bidly-theme-toggle__mode--light {
+  display: none;
+}
+
+html[data-theme='dark'] .bidly-theme-toggle__mode--dark {
+  display: inline-flex;
+}
+
+.bidly-theme-toggle:hover {
+  color: var(--bidly-color-text-primary);
+  background: var(--bidly-color-brand-subtle);
+  border-color: var(--bidly-color-brand);
+}
+
+.bidly-theme-toggle:focus-visible {
+  outline: 2px solid var(--bidly-color-focus);
+  outline-offset: 3px;
+}
+
+.bidly-theme-toggle__icon {
+  display: grid;
+  width: 1.15rem;
+  height: 1.15rem;
+  place-items: center;
+  color: var(--bidly-color-brand);
+  font-size: 1rem;
 }
 
 .bidly-public-header[data-tone] .bidly-public-header__nav a,
@@ -172,7 +252,7 @@ textarea::placeholder {
   z-index: -1;
   width: 100vw;
   content: '';
-  background: #05060d;
+  background: var(--bidly-color-footer-background);
   transform: translateX(-50%);
 }
 
@@ -313,7 +393,7 @@ textarea::placeholder {
   box-shadow: var(--bidly-glow-violet);
 }
 
-.p5-about-hero .bidly-brand-logo[data-variant='lockup-on-dark'] {
+.p5-about-hero .bidly-theme-brand {
   width: min(100%, 30rem);
 }
 
@@ -324,9 +404,10 @@ textarea::placeholder {
 }
 
 .p5-auth-story {
+  color: #f5f7f2;
   background:
     radial-gradient(circle at 12% 100%, rgb(123 97 255 / 19%), transparent 32rem),
-    radial-gradient(circle at 95% 8%, rgb(198 255 0 / 7%), transparent 24rem), #070812;
+    radial-gradient(circle at 95% 8%, rgb(198 255 0 / 7%), transparent 24rem), #0b0e16;
 }
 
 .p5-auth-panel {
@@ -335,6 +416,12 @@ textarea::placeholder {
 
 .p5-auth-panel-brand {
   display: none;
+}
+
+.p5-auth-panel__controls {
+  display: flex;
+  justify-content: flex-end;
+  width: min(100%, 34rem);
 }
 
 .p5-auth-visual > div {
@@ -359,7 +446,7 @@ textarea::placeholder {
 
 .p5-buyer-sidebar {
   color: var(--bidly-color-text-secondary);
-  background: #05060d;
+  background: var(--bidly-color-sidebar-background);
   border-right: 1px solid var(--bidly-color-border);
 }
 
@@ -386,7 +473,7 @@ textarea::placeholder {
 .p5-appbar,
 .p5-business-topbar {
   color: var(--bidly-color-text-primary);
-  background: rgb(11 13 24 / 88%);
+  background: var(--bidly-color-header-background);
   border-bottom: 1px solid var(--bidly-color-border);
   box-shadow: none;
   backdrop-filter: blur(1rem);
@@ -423,7 +510,7 @@ textarea::placeholder {
 
 .p5-buyer-bottom-nav {
   color: var(--bidly-color-text-secondary);
-  background: rgb(7 8 18 / 96%);
+  background: var(--bidly-color-header-scrolled);
   border-top: 1px solid var(--bidly-color-border);
 }
 
@@ -435,7 +522,7 @@ textarea::placeholder {
 }
 
 .p5-business-sidebar {
-  background: #05060d;
+  background: var(--bidly-color-sidebar-background);
   border-right: 1px solid var(--bidly-color-border);
 }
 
@@ -445,7 +532,7 @@ textarea::placeholder {
 
 .p5-business-sidebar nav a[data-active='true'],
 .p5-business-sidebar nav a:hover {
-  color: #111408;
+  color: var(--bidly-color-on-brand);
   background: var(--bidly-color-brand);
 }
 
@@ -525,7 +612,7 @@ textarea::placeholder {
 }
 
 .bidly-business-unavailable__rail {
-  background: #05060d;
+  background: var(--bidly-color-sidebar-background);
   border-right: 1px solid var(--bidly-color-border);
 }
 

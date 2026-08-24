@@ -21,6 +21,14 @@ const targetViewports = [
   { width: 375, height: 812 },
 ];
 
+const themes = ['light', 'dark'];
+
+function setTheme(context, theme) {
+  return context.addInitScript((selectedTheme) => {
+    window.localStorage.setItem('bidly-theme', selectedTheme);
+  }, theme);
+}
+
 const captures = [
   { name: 'home-desktop', path: '/', viewport: { width: 1440, height: 900 } },
   { name: 'home-tablet', path: '/', viewport: { width: 768, height: 1024 } },
@@ -107,25 +115,32 @@ const browser = await chromium.launch({ headless: true });
 
 try {
   const viewportResults = [];
-  for (const viewport of targetViewports) {
-    const page = await browser.newPage({ viewport });
-    const consoleErrors = [];
-    page.on('console', (message) => {
-      if (message.type() === 'error') consoleErrors.push(message.text());
-    });
-    await page.goto(`${baseUrl}/`, { waitUntil: 'networkidle' });
-    const result = await page.evaluate(() => {
-      const heroImage = document.querySelector('.bidly-hero-visual img');
-      return {
-        headingVisible: Boolean(document.querySelector('h1')),
-        heroReady: heroImage instanceof HTMLImageElement && heroImage.complete,
-        horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth + 1,
-        scrollScrubRegionCount: document.querySelectorAll('[data-hero-scroll-region]').length,
-        videoCount: document.querySelectorAll('video').length,
-      };
-    });
-    viewportResults.push({ ...viewport, ...result, consoleErrors });
-    await page.close();
+  for (const theme of themes) {
+    for (const viewport of targetViewports) {
+      const context = await browser.newContext({ viewport });
+      await setTheme(context, theme);
+      const page = await context.newPage();
+      const consoleErrors = [];
+      page.on('console', (message) => {
+        if (message.type() === 'error') consoleErrors.push(message.text());
+      });
+      await page.goto(`${baseUrl}/`, { waitUntil: 'networkidle' });
+      const result = await page.evaluate(() => {
+        const heroImage = document.querySelector('.bidly-hero-visual img');
+        return {
+          activeTheme: document.documentElement.dataset.theme,
+          headingVisible: Boolean(document.querySelector('h1')),
+          heroReady: heroImage instanceof HTMLImageElement && heroImage.complete,
+          heroSource:
+            heroImage instanceof HTMLImageElement ? new URL(heroImage.currentSrc).pathname : null,
+          horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth + 1,
+          scrollScrubRegionCount: document.querySelectorAll('[data-hero-scroll-region]').length,
+          videoCount: document.querySelectorAll('video').length,
+        };
+      });
+      viewportResults.push({ ...viewport, ...result, consoleErrors, theme });
+      await context.close();
+    }
   }
   await writeFile(
     resolve(outputDirectory, 'viewport-qa.json'),
@@ -140,85 +155,92 @@ try {
       viewport: { width: 1440, height: 900 },
     })),
   ];
-  for (const route of routes) {
-    const context = await browser.newContext({ viewport: route.viewport });
-    if (route.requiresBuyer) await loginBuyer(context);
-    const page = await context.newPage();
-    const consoleErrors = [];
-    const pageErrors = [];
-    page.on('console', (message) => {
-      if (message.type() === 'error') consoleErrors.push(message.text());
-    });
-    page.on('pageerror', (error) => pageErrors.push(error.message));
-    const response = await page.goto(new URL(route.path, baseUrl).toString(), {
-      waitUntil: 'networkidle',
-    });
-    const metrics = await page.evaluate(() => {
-      const selectorFor = (element) => {
-        if (element.id) return `#${element.id}`;
-        const classes = [...element.classList].slice(0, 3).join('.');
-        return `${element.tagName.toLowerCase()}${classes ? `.${classes}` : ''}`;
-      };
-      const unexpectedLightSurfaces = [...document.querySelectorAll('body *')]
-        .filter((element) => {
-          const rect = element.getBoundingClientRect();
-          if (rect.width * rect.height < 400 || rect.bottom < 0 || rect.top > window.innerHeight)
-            return false;
-          const match = getComputedStyle(element).backgroundColor.match(
-            /rgba?\((\d+)[, ]+(\d+)[, ]+(\d+)(?:[, /]+([\d.]+))?\)/,
-          );
-          if (!match) return false;
-          const [, red = '0', green = '0', blue = '0', alpha = '1'] = match;
-          return (
-            Number(alpha) >= 0.75 &&
-            Number(red) >= 230 &&
-            Number(green) >= 230 &&
-            Number(blue) >= 230
-          );
-        })
-        .slice(0, 20)
-        .map(selectorFor);
-      const brandImages = [...document.querySelectorAll('img')]
-        .filter((image) => image.currentSrc.includes('/brand/'))
-        .map((image) => {
-          const style = getComputedStyle(image);
-          const parentStyle = image.parentElement ? getComputedStyle(image.parentElement) : null;
-          return {
-            border: style.border,
-            boxShadow: style.boxShadow,
-            filter: style.filter,
-            mixBlendMode: style.mixBlendMode,
-            parentBackground: parentStyle?.backgroundColor ?? null,
-            src: new URL(image.currentSrc).pathname,
-          };
-        });
-      return {
-        brandImages,
-        horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth + 1,
-        imageFailures: [...document.images]
-          .filter((image) => image.complete && image.naturalWidth === 0)
-          .map((image) => image.currentSrc || image.src),
-        unexpectedLightSurfaces,
-      };
-    });
-    if (captures.includes(route))
-      await page.screenshot({ path: resolve(outputDirectory, `${route.name}.png`) });
-    routeResults.push({
-      consoleErrors,
-      name: route.name,
-      pageErrors,
-      path: route.path,
-      status: response?.status() ?? null,
-      ...metrics,
-    });
-    await context.close();
+  for (const theme of themes) {
+    for (const route of routes) {
+      const context = await browser.newContext({ viewport: route.viewport });
+      await setTheme(context, theme);
+      if (route.requiresBuyer) await loginBuyer(context);
+      const page = await context.newPage();
+      const consoleErrors = [];
+      const pageErrors = [];
+      page.on('console', (message) => {
+        if (message.type() === 'error') consoleErrors.push(message.text());
+      });
+      page.on('pageerror', (error) => pageErrors.push(error.message));
+      const response = await page.goto(new URL(route.path, baseUrl).toString(), {
+        waitUntil: 'networkidle',
+      });
+      const metrics = await page.evaluate(() => {
+        const selectorFor = (element) => {
+          if (element.id) return `#${element.id}`;
+          const classes = [...element.classList].slice(0, 3).join('.');
+          return `${element.tagName.toLowerCase()}${classes ? `.${classes}` : ''}`;
+        };
+        const unexpectedLightSurfaces = [...document.querySelectorAll('body *')]
+          .filter((element) => {
+            const rect = element.getBoundingClientRect();
+            if (rect.width * rect.height < 400 || rect.bottom < 0 || rect.top > window.innerHeight)
+              return false;
+            const match = getComputedStyle(element).backgroundColor.match(
+              /rgba?\((\d+)[, ]+(\d+)[, ]+(\d+)(?:[, /]+([\d.]+))?\)/,
+            );
+            if (!match) return false;
+            const [, red = '0', green = '0', blue = '0', alpha = '1'] = match;
+            return (
+              Number(alpha) >= 0.75 &&
+              Number(red) >= 230 &&
+              Number(green) >= 230 &&
+              Number(blue) >= 230
+            );
+          })
+          .slice(0, 20)
+          .map(selectorFor);
+        const brandImages = [...document.querySelectorAll('img')]
+          .filter((image) => image.currentSrc.includes('/brand/'))
+          .map((image) => {
+            const style = getComputedStyle(image);
+            const parentStyle = image.parentElement ? getComputedStyle(image.parentElement) : null;
+            return {
+              border: style.border,
+              boxShadow: style.boxShadow,
+              filter: style.filter,
+              mixBlendMode: style.mixBlendMode,
+              parentBackground: parentStyle?.backgroundColor ?? null,
+              src: new URL(image.currentSrc).pathname,
+            };
+          });
+        return {
+          activeTheme: document.documentElement.dataset.theme,
+          brandImages,
+          horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth + 1,
+          imageFailures: [...document.images]
+            .filter((image) => image.complete && image.naturalWidth === 0)
+            .map((image) => image.currentSrc || image.src),
+          unexpectedLightSurfaces,
+        };
+      });
+      if (captures.includes(route))
+        await page.screenshot({ path: resolve(outputDirectory, `${route.name}-${theme}.png`) });
+      routeResults.push({
+        consoleErrors,
+        name: route.name,
+        pageErrors,
+        path: route.path,
+        status: response?.status() ?? null,
+        theme,
+        ...metrics,
+      });
+      await context.close();
+    }
   }
   await writeFile(
     resolve(outputDirectory, 'route-qa.json'),
     `${JSON.stringify(routeResults, null, 2)}\n`,
   );
 
-  const performancePage = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  const performanceContext = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  await setTheme(performanceContext, 'dark');
+  const performancePage = await performanceContext.newPage();
   await performancePage.addInitScript(() => {
     window.__bidlyHeroMetrics = { cls: 0, lcp: 0 };
     new PerformanceObserver((list) => {
@@ -237,7 +259,7 @@ try {
   const performance = await performancePage.evaluate(() => {
     const resources = performance.getEntriesByType('resource');
     const heroResources = resources
-      .filter((entry) => entry.name.includes('/media/bidly-hero-static'))
+      .filter((entry) => entry.name.includes('/media/bidly-hero-road'))
       .map((entry) => ({
         encodedBodySize: entry.encodedBodySize,
         name: new URL(entry.name).pathname,
@@ -256,6 +278,7 @@ try {
     `${JSON.stringify(performance, null, 2)}\n`,
   );
   await performancePage.close();
+  await performanceContext.close();
 } finally {
   await browser.close();
 }

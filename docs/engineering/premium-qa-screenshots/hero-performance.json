@@ -1,14 +1,14 @@
 {
   "cls": 0,
-  "lcp": 1584,
+  "lcp": 1044,
   "context": "local Next.js development server; directional observation, not a lab benchmark",
   "heroResources": [
     {
-      "encodedBodySize": 135824,
-      "name": "/media/bidly-hero-static-1536.webp",
-      "transferSize": 136124
+      "encodedBodySize": 84802,
+      "name": "/media/bidly-hero-road-1536.webp",
+      "transferSize": 85102
     }
   ],
-  "totalEncodedBodySize": 1092428,
-  "totalTransferSize": 1097528
+  "totalEncodedBodySize": 1198843,
+  "totalTransferSize": 1204243
 }

@@ -1,16 +1,16 @@
 :root {
-  --bidly-home-bg: #070812;
-  --bidly-home-bg-secondary: #0b0d18;
-  --bidly-home-surface: rgb(255 255 255 / 4.5%);
-  --bidly-home-surface-raised: #11131e;
-  --bidly-home-text: #f7f8fb;
-  --bidly-home-text-secondary: #a6acbc;
-  --bidly-home-text-muted: #72798c;
-  --bidly-home-lime: #c6ff00;
-  --bidly-home-lime-soft: #b8f500;
-  --bidly-home-violet: #7b61ff;
-  --bidly-home-blue: #386cff;
-  --bidly-home-border: rgb(255 255 255 / 9%);
+  --bidly-home-bg: var(--bidly-color-background-primary);
+  --bidly-home-bg-secondary: var(--bidly-color-background-secondary);
+  --bidly-home-surface: var(--bidly-color-surface);
+  --bidly-home-surface-raised: var(--bidly-color-surface-raised);
+  --bidly-home-text: var(--bidly-color-text-primary);
+  --bidly-home-text-secondary: var(--bidly-color-text-secondary);
+  --bidly-home-text-muted: var(--bidly-color-text-muted);
+  --bidly-home-lime: var(--bidly-color-brand);
+  --bidly-home-lime-soft: var(--bidly-color-brand-hover);
+  --bidly-home-violet: var(--bidly-color-brand-violet);
+  --bidly-home-blue: var(--bidly-color-brand-blue);
+  --bidly-home-border: var(--bidly-color-border);
 }
 
 .bidly-home {
@@ -88,7 +88,7 @@
 
 .bidly-public-header[data-tone='dark'] .bidly-link-button--primary,
 .bidly-public-header[data-tone='dark'] .bidly-public-header__mobile-cta {
-  color: #111408;
+  color: var(--bidly-color-on-brand);
   background: var(--bidly-home-lime);
   border-color: var(--bidly-home-lime);
   box-shadow: 0 0.6rem 1.6rem rgb(198 255 0 / 10%);
@@ -104,7 +104,19 @@
 .bidly-home-hero-region {
   position: relative;
   min-height: calc(100svh - 4.75rem);
-  background: var(--bidly-home-bg);
+  --bidly-home-bg: #080a12;
+  --bidly-home-bg-secondary: #111521;
+  --bidly-home-surface: rgb(255 255 255 / 5%);
+  --bidly-home-surface-raised: #151a27;
+  --bidly-home-text: #f5f7f2;
+  --bidly-home-text-secondary: #b4bbc6;
+  --bidly-home-text-muted: #8992a0;
+  --bidly-home-lime: #b8e800;
+  --bidly-home-lime-soft: #c7f31c;
+  --bidly-home-violet: #a28dff;
+  --bidly-home-blue: #7095ff;
+  --bidly-home-border: rgb(255 255 255 / 10%);
+  background: #080a12;
   isolation: isolate;
 }
 
@@ -326,7 +338,7 @@
 }
 
 .bidly-hero-visual img {
-  object-fit: cover;
+  object-fit: contain;
   object-position: center center;
 }
 
@@ -336,11 +348,11 @@
     linear-gradient(
       90deg,
       var(--bidly-home-bg) 0%,
-      rgb(7 8 18 / 97%) 24%,
-      rgb(7 8 18 / 77%) 42%,
+      rgb(8 10 18 / 96%) 24%,
+      rgb(8 10 18 / 72%) 42%,
       transparent 68%
     ),
-    linear-gradient(180deg, rgb(7 8 18 / 18%), transparent 24%, transparent 78%, #070812 100%);
+    linear-gradient(180deg, rgb(8 10 18 / 12%), transparent 24%, transparent 78%, #080a12 100%);
 }
 
 .bidly-home-section {
@@ -603,8 +615,8 @@
   padding: clamp(3rem, 6vw, 5.5rem);
   margin-bottom: clamp(5rem, 9vw, 8rem);
   background:
-    radial-gradient(circle at 86% 18%, rgb(198 255 0 / 12%), transparent 24rem),
-    linear-gradient(120deg, #111326, #0b0d18 64%);
+    radial-gradient(circle at 86% 18%, var(--bidly-color-brand-subtle), transparent 24rem),
+    linear-gradient(120deg, var(--bidly-home-surface-raised), var(--bidly-home-bg-secondary) 64%);
   border: 1px solid var(--bidly-home-border);
   border-radius: 1.25rem;
   box-shadow: 0 2.5rem 5rem rgb(0 0 0 / 18%);
@@ -621,8 +633,14 @@
 
 .bidly-home-button--light {
   margin-top: 1.75rem;
-  color: #111408;
+  color: var(--bidly-color-on-brand);
   background: var(--bidly-home-lime);
+}
+
+html[data-theme='dark'] .bidly-public-header[data-tone='dark'] .bidly-link-button--primary,
+html[data-theme='dark'] .bidly-public-header[data-tone='dark'] .bidly-public-header__mobile-cta,
+html[data-theme='dark'] .bidly-home-button--light {
+  color: #111408;
 }
 
 .bidly-home-button--light:hover {
@@ -632,7 +650,7 @@
 
 .bidly-public-footer[data-tone='dark'] {
   color: var(--bidly-home-text-secondary);
-  background: #05060d;
+  background: var(--bidly-color-footer-background);
   border-top: 1px solid var(--bidly-home-border);
 }
 
@@ -780,15 +798,16 @@
   }
 
   .bidly-hero-visual img {
-    object-position: 68% bottom;
+    object-fit: cover;
+    object-position: 72% 74%;
   }
 
   .bidly-hero-visual__readability {
     background: linear-gradient(
       180deg,
       var(--bidly-home-bg) 0%,
-      rgb(7 8 18 / 96%) 43%,
-      rgb(7 8 18 / 28%) 70%,
+      rgb(8 10 18 / 96%) 43%,
+      rgb(8 10 18 / 28%) 70%,
       var(--bidly-home-bg) 100%
     );
   }

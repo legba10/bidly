@@ -1,9 +1,11 @@
-import { BidlyIcon, BrandLogo } from '@bidly/ui';
+import { BidlyIcon } from '@bidly/ui';
 import Link from 'next/link';
 
 import { ruRU } from '../i18n/messages/ru-RU';
 
 import { PublicHeaderScrollState } from './public-header-scroll-state';
+import { ThemeAwareBrandLogo } from './theme-aware-brand-logo';
+import { ThemeToggle } from './theme-toggle';
 
 export function PublicHeader({ tone = 'dark' }: { readonly tone?: 'dark' | 'light' }) {
   const messages = ruRU.shared;
@@ -20,7 +22,7 @@ export function PublicHeader({ tone = 'dark' }: { readonly tone?: 'dark' | 'ligh
       <PublicHeaderScrollState headerId="bidly-public-header" />
       <div className="bidly-public-header__inner">
         <Link className="bidly-public-header__brand" href="/">
-          <BrandLogo variant={tone === 'dark' ? 'on-dark' : 'on-light'} />
+          <ThemeAwareBrandLogo />
         </Link>
         <nav aria-label="Основная навигация" className="bidly-public-header__nav">
           {navigation.map((item) => (
@@ -30,6 +32,7 @@ export function PublicHeader({ tone = 'dark' }: { readonly tone?: 'dark' | 'ligh
           ))}
         </nav>
         <div className="bidly-public-header__actions">
+          <ThemeToggle />
           <Link className="bidly-link-button bidly-link-button--quiet" href="/login">
             {messages.signIn}
           </Link>
@@ -69,7 +72,7 @@ export function PublicFooter({ tone = 'dark' }: { readonly tone?: 'dark' | 'ligh
   return (
     <footer className="bidly-public-footer" data-tone={tone}>
       <div className="bidly-public-footer__brand">
-        <BrandLogo variant={tone === 'dark' ? 'on-dark' : 'on-light'} />
+        <ThemeAwareBrandLogo />
         <p>{ruRU.landing.footer}</p>
       </div>
       <nav aria-label="Покупателям" className="bidly-public-footer__links">
