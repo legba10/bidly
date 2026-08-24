@@ -1,6 +1,6 @@
 {
   "cls": 0,
-  "lcp": 828,
+  "lcp": 1696,
   "context": "local Next.js development server; directional observation, not a lab benchmark",
   "heroResources": [
     {
@@ -9,6 +9,6 @@
       "transferSize": 85102
     }
   ],
-  "totalEncodedBodySize": 1199992,
-  "totalTransferSize": 1205392
+  "totalEncodedBodySize": 1200009,
+  "totalTransferSize": 1205409
 }

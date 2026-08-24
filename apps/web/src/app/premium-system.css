@@ -540,6 +540,16 @@ html[data-theme='dark'] .bidly-theme-toggle__mode--dark {
 .p5-business-manager {
   background: var(--bidly-color-surface);
   border: 1px solid var(--bidly-color-border);
+  color: var(--bidly-color-text-primary);
+}
+
+.p5-business-company small,
+.p5-business-manager small {
+  color: var(--bidly-color-text-secondary);
+}
+
+.p5-business-manager a {
+  color: var(--bidly-color-brand);
 }
 
 .p5-business-panel,
