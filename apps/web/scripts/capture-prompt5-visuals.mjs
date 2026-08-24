@@ -34,10 +34,12 @@ const captures = [
   { name: 'home-tablet', path: '/', viewport: { width: 768, height: 1024 } },
   { name: 'home-mobile', path: '/', viewport: { width: 390, height: 844 } },
   { name: 'how-it-works-desktop', path: '/how-it-works', viewport: { width: 1440, height: 900 } },
+  { name: 'how-it-works-mobile', path: '/how-it-works', viewport: { width: 390, height: 844 } },
   { name: 'market-desktop', path: '/market', viewport: { width: 1440, height: 900 } },
   { name: 'market-mobile', path: '/market', viewport: { width: 390, height: 844 } },
   { name: 'business-info-desktop', path: '/business-info', viewport: { width: 1440, height: 900 } },
   { name: 'about-desktop', path: '/about', viewport: { width: 1440, height: 900 } },
+  { name: 'about-mobile', path: '/about', viewport: { width: 390, height: 844 } },
   { name: 'support-desktop', path: '/support', viewport: { width: 1440, height: 900 } },
   { name: 'login-desktop', path: '/login', viewport: { width: 1440, height: 900 } },
   { name: 'login-mobile', path: '/login', viewport: { width: 390, height: 844 } },
@@ -55,6 +57,16 @@ const captures = [
   },
   { name: 'business-dashboard-desktop', path: '/business', viewport: { width: 1440, height: 900 } },
   { name: 'business-dashboard-mobile', path: '/business', viewport: { width: 390, height: 844 } },
+  {
+    name: 'business-analytics-desktop',
+    path: '/business/analytics',
+    viewport: { width: 1440, height: 900 },
+  },
+  {
+    name: 'business-analytics-mobile',
+    path: '/business/analytics',
+    viewport: { width: 390, height: 844 },
+  },
 ];
 
 const additionalRouteAudits = [

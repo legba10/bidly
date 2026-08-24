@@ -5,8 +5,8 @@ import { HeroCopy } from './hero-copy';
 export function HomeHero() {
   return (
     <section className="bidly-home-hero-region">
+      <BidlyHeroVisual />
       <div className="bidly-home-hero">
-        <BidlyHeroVisual />
         <HeroCopy />
       </div>
     </section>

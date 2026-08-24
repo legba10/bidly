@@ -1,11 +1,4 @@
-import {
-  BidlyIcon,
-  BusinessMetric,
-  CapacityChart,
-  ConversionFunnel,
-  DemandCard,
-  OfferCard,
-} from '@bidly/ui';
+import { BidlyIcon, BusinessMetric, CapacityChart, DemandCard, OfferCard } from '@bidly/ui';
 import Link from 'next/link';
 
 import { demoBusiness, demoCategories, demoOffers } from '../demo/marketplace-demo';
@@ -36,6 +29,86 @@ function Header({ section }: { readonly section: string }) {
         <p>{detail}</p>
       </div>
     </header>
+  );
+}
+
+function BusinessFunnel({ compact = false }: { readonly compact?: boolean }) {
+  const maximum = Math.max(...demoBusiness.funnel.map((item) => item.value), 1);
+
+  return (
+    <ol
+      className={compact ? 'p5-business-funnel p5-business-funnel--compact' : 'p5-business-funnel'}
+    >
+      {demoBusiness.funnel.map((item, index) => {
+        const previous = demoBusiness.funnel[index - 1]?.value;
+        const conversion = previous === undefined ? 100 : (item.value / previous) * 100;
+        const loss = previous === undefined ? 0 : previous - item.value;
+        return (
+          <li key={item.label}>
+            <div className="p5-business-funnel__label">
+              <span>{index + 1}</span>
+              <strong>{item.label}</strong>
+            </div>
+            <div
+              aria-label={`${item.label}: ${item.value.toLocaleString('ru-RU')}`}
+              className="p5-business-funnel__track"
+            >
+              <i style={{ width: `${String(Math.max(5, (item.value / maximum) * 100))}%` }} />
+            </div>
+            <strong className="p5-business-funnel__value">
+              {item.value.toLocaleString('ru-RU')}
+            </strong>
+            <small>
+              {index === 0
+                ? 'база'
+                : `${conversion.toLocaleString('ru-RU', { maximumFractionDigits: 1 })}% · −${loss.toLocaleString('ru-RU')}`}
+            </small>
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
+
+function WeeklyTrend() {
+  // These are the existing eight weekly values from the former chart, now with a readable scale.
+  const values = [38, 52, 47, 66, 72, 64, 84, 91] as const;
+  const maximum = Math.max(...values, 1);
+  const points = values
+    .map((value, index) => {
+      const x = 8 + index * 12;
+      const y = 86 - (value / maximum) * 66;
+      return `${String(x)},${String(y)}`;
+    })
+    .join(' ');
+
+  return (
+    <figure className="p5-trend-chart">
+      <figcaption>
+        <span>Недели периода</span>
+        <strong>{maximum}</strong>
+      </figcaption>
+      <svg aria-label="Динамика по неделям" role="img" viewBox="0 0 100 100">
+        <line x1="4" x2="96" y1="20" y2="20" />
+        <line x1="4" x2="96" y1="53" y2="53" />
+        <line x1="4" x2="96" y1="86" y2="86" />
+        <polyline points={points} />
+        {values.map((value, index) => {
+          const x = 8 + index * 12;
+          const y = 86 - (value / maximum) * 66;
+          return (
+            <g key={value}>
+              <title>{`Неделя ${String(index + 1)}: ${String(value)}`}</title>
+              <circle cx={x} cy={y} r="2.6" tabIndex={0} />
+              <text x={x} y="96">
+                {index + 1}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+      <p>Наведите на точку, чтобы увидеть значение недели.</p>
+    </figure>
   );
 }
 
@@ -89,7 +162,7 @@ function BusinessHome() {
             <h2>Конверсия за 30 дней</h2>
             <Link href="/business/analytics">Подробнее</Link>
           </header>
-          <ConversionFunnel items={demoBusiness.funnel} />
+          <BusinessFunnel compact />
           <footer>
             <span>Конверсия в оплату</span>
             <strong>3,4%</strong>
@@ -358,24 +431,13 @@ function AnalyticsSection() {
           <h2>Воронка за 30 дней</h2>
           <span>3,4% в подтверждённое исполнение</span>
         </header>
-        <ConversionFunnel items={demoBusiness.funnel} />
+        <BusinessFunnel />
       </section>
       <section className="p5-business-panel">
         <header>
           <h2>Динамика по неделям</h2>
         </header>
-        <div className="p5-bar-chart">
-          {[38, 52, 47, 66, 72, 64, 84, 91].map((value, index) => (
-            <i key={index} style={{ height: `${String(value)}%` }}>
-              <span>{value}</span>
-            </i>
-          ))}
-        </div>
-        <footer>
-          <span>Предложения</span>
-          <span>Выбор</span>
-          <span>Исполнение</span>
-        </footer>
+        <WeeklyTrend />
       </section>
     </div>
   );

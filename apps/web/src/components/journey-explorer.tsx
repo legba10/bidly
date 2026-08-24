@@ -7,8 +7,8 @@ const steps = [
   {
     title: 'Вы описываете потребность',
     body: 'Услуга, город, бюджет и важные ограничения сохраняются в вашем запросе.',
-    visual: ['Сургут', '500 Мбит/с', 'до 700 ₽/мес'],
-    safeVisual: ['Категория услуги', 'Город', 'Важные ограничения'],
+    visual: ['Город: Сургут', 'Скорость: от 500 Мбит/с', 'Бюджет: до 700 ₽/мес'],
+    safeVisual: ['Город', 'Условие услуги', 'Бюджет и ограничения'],
   },
   {
     title: 'Bidly объединяет совместимый спрос',
@@ -75,26 +75,43 @@ export function JourneyExplorer({ demoMode }: { readonly demoMode: boolean }) {
           <h2>{step.title}</h2>
           <p>{step.body}</p>
         </div>
-        <div className="p5-journey-explorer__visual">
-          <span className="p5-journey-explorer__pulse">
-            <BidlyIcon
-              name={
-                active < 2
-                  ? 'users'
-                  : active < 4
-                    ? 'building'
-                    : active === 5
-                      ? 'calendar'
-                      : 'check-circle'
-              }
-            />
-          </span>
-          {(demoMode ? step.visual : step.safeVisual).map((item) => (
-            <span key={item}>
-              <BidlyIcon name="check-circle" />
-              {item}
+        <div className="p5-journey-explorer__visual" data-step={active + 1}>
+          <header>
+            <span className="p5-journey-explorer__pulse">
+              <BidlyIcon
+                name={
+                  active < 2
+                    ? 'users'
+                    : active < 4
+                      ? 'building'
+                      : active === 5
+                        ? 'calendar'
+                        : 'check-circle'
+                }
+              />
             </span>
-          ))}
+            <div>
+              <strong>{active === 0 ? 'Запрос на домашний интернет' : step.title}</strong>
+              <small>
+                {active === 0 ? 'Черновик условий покупателя' : `Шаг ${String(active + 1)} из 7`}
+              </small>
+            </div>
+          </header>
+          <div className="p5-journey-explorer__fields">
+            {(demoMode ? step.visual : step.safeVisual).map((item, index) => (
+              <div key={item}>
+                <span>
+                  {active === 0 ? ['Город', 'Скорость', 'Бюджет'][index] : `0${String(index + 1)}`}
+                </span>
+                <strong>{item}</strong>
+                <BidlyIcon name={active === 4 && index < 2 ? 'arrow-right' : 'check-circle'} />
+              </div>
+            ))}
+          </div>
+          <footer>
+            <span>{active === 0 ? 'Условия сохраняются в запросе' : 'Проверка условий Bidly'}</span>
+            <BidlyIcon name="shield" />
+          </footer>
         </div>
       </article>
     </div>

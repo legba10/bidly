@@ -104,6 +104,7 @@
 .bidly-home-hero-region {
   position: relative;
   min-height: calc(100svh - 4.75rem);
+  overflow: hidden;
   --bidly-home-bg: #080a12;
   --bidly-home-bg-secondary: #111521;
   --bidly-home-surface: rgb(255 255 255 / 5%);
@@ -120,21 +121,9 @@
   isolation: isolate;
 }
 
-.bidly-home-hero-region::before {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  content: '';
-  background-image:
-    linear-gradient(rgb(255 255 255 / 1.5%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(255 255 255 / 1.5%) 1px, transparent 1px);
-  background-size: 5rem 5rem;
-  mask-image: radial-gradient(ellipse at 77% 38%, #000 2%, transparent 68%);
-  opacity: 0.62;
-}
-
 .bidly-home-hero {
   position: relative;
+  z-index: 1;
   display: grid;
   width: min(calc(100% - (var(--bidly-layout-page-gutter) * 2)), 92rem);
   min-height: calc(100svh - 4.75rem);
@@ -249,12 +238,12 @@
   color: #111408;
   background: var(--bidly-home-lime);
   border-color: var(--bidly-home-lime);
-  box-shadow: 0 0.8rem 2.2rem rgb(198 255 0 / 11%);
+  box-shadow: 0 0.45rem 1.25rem rgb(198 255 0 / 8%);
 }
 
 .bidly-home-button--primary:hover {
   filter: brightness(1.06);
-  box-shadow: 0 0.9rem 2.4rem rgb(198 255 0 / 17%);
+  box-shadow: 0 0.55rem 1.45rem rgb(198 255 0 / 11%);
   transform: translateY(-1px);
 }
 
@@ -338,8 +327,8 @@
 }
 
 .bidly-hero-visual img {
-  object-fit: contain;
-  object-position: center center;
+  object-fit: cover;
+  object-position: 60% center;
 }
 
 .bidly-hero-visual__readability {
@@ -348,9 +337,10 @@
     linear-gradient(
       90deg,
       var(--bidly-home-bg) 0%,
-      rgb(8 10 18 / 96%) 24%,
-      rgb(8 10 18 / 72%) 42%,
-      transparent 68%
+      rgb(8 10 18 / 97%) 28%,
+      rgb(8 10 18 / 76%) 46%,
+      rgb(8 10 18 / 26%) 72%,
+      rgb(8 10 18 / 7%) 100%
     ),
     linear-gradient(180deg, rgb(8 10 18 / 12%), transparent 24%, transparent 78%, #080a12 100%);
 }
@@ -792,9 +782,8 @@ html[data-theme='dark'] .bidly-home-button--light {
   }
 
   .bidly-hero-visual {
-    right: calc(var(--bidly-layout-page-gutter) * -1);
-    left: calc(var(--bidly-layout-page-gutter) * -1);
-    width: auto;
+    inset: 0;
+    width: 100%;
   }
 
   .bidly-hero-visual img {

@@ -27,6 +27,10 @@ export default function HowItWorksPage() {
           <div>
             <p className="bidly-eyebrow">Что остаётся неизменным</p>
             <h2>Ваш выбор важнее алгоритма</h2>
+            <p className="p5-trust__intro">
+              Bidly помогает сравнивать условия и проверять доступность, но не выбирает поставщика
+              за покупателя.
+            </p>
           </div>
           <div className="p5-trust__grid">
             <article>
